@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>板塊資金儀表板｜使用說明</title>
+<style>
+:root{--bg:#09131c;--panel:#10202c;--panel2:#0d1a24;--line:#22384a;--ink:#e8f1f6;--dim:#8aa3b4;--faint:#5b7688;--red:#ff495f;--green:#1ec98a;--amber:#f4b53f}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(1000px 680px at 85% -5%,#153047 0,transparent 60%),var(--bg);color:var(--ink);font-family:"Noto Sans TC","Segoe UI",system-ui,sans-serif;line-height:1.75}
+.wrap{max-width:920px;margin:auto;padding:24px}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:16px}h1{font-size:28px;margin:0}.sub{color:var(--dim);margin-top:6px}.btn{display:inline-block;text-decoration:none;color:#171207;background:var(--amber);font-weight:800;padding:10px 16px;border-radius:10px}.card{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:15px;padding:20px;margin:14px 0}h2{font-size:19px;margin:0 0 10px;color:var(--amber)}h3{font-size:15px;margin:16px 0 5px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.mini{background:#0a1720;border:1px solid var(--line);border-radius:11px;padding:14px}.k{color:var(--faint);font-size:12px}.v{font-weight:800;margin-top:2px}.red{color:var(--red)}.green{color:var(--green)}code{background:#08131b;border:1px solid var(--line);padding:2px 6px;border-radius:6px;color:#cde4ef}ol,ul{padding-left:22px}.notice{border-left:4px solid var(--amber);padding:10px 14px;background:rgba(244,181,63,.08);border-radius:8px}.foot{color:var(--faint);font-size:12px;text-align:center;margin:22px 0}@media(max-width:680px){.grid{grid-template-columns:1fr}.wrap{padding:16px}h1{font-size:23px}}
+</style>
+</head>
+<body><main class="wrap">
+<div class="top"><div><h1>板塊資金儀表板｜使用說明</h1><div class="sub">快速判讀 16 個自訂板塊的盤後法人資金方向、強弱與內部分歧。</div></div><a class="btn" href="./dashboard.html">開啟儀表板</a></div>
+<section class="card"><h2>一、先確認目前看到的是真實資料</h2><ol><li>右上角應顯示「資料日 YYYY-MM-DD」與「16 板塊」。</li><li>不能顯示「範例資料」。若看到範例資料，代表網頁未成功讀取 <code>data/bubble_data.json</code>。</li><li>雲端網址正常時會自動載入；本機不要直接雙擊 HTML，應使用 <code>python -m http.server</code>。</li></ol><div class="notice">只看到「晶圓製造、探針卡、ABF/BT、散熱」四個板塊，代表目前顯示的是內建範例，不是正式 16 板塊資料。</div></section>
+<section class="card"><h2>二、泡泡圖怎麼看</h2><div class="grid"><div class="mini"><div class="k">X 軸｜挹注強度</div><div class="v">淨流入 ÷ 板塊成交值</div><div>越右代表資金流入越強；越左代表流出越強。</div></div><div class="mini"><div class="k">Y 軸｜異常度 z</div><div class="v">今日相對自身近 20 日</div><div>越上代表今日資金流相對異常偏熱；越下代表偏冷。</div></div><div class="mini"><div class="k">泡泡大小</div><div class="v">板塊成交值</div><div>泡泡越大，代表板塊當日成交規模越大。</div></div><div class="mini"><div class="k">泡泡顏色</div><div class="v"><span class="red">紅＝流入</span>；<span class="green">綠＝流出</span></div><div>採台股慣例，與歐美市場配色相反。</div></div><div class="mini"><div class="k">光暈</div><div class="v">成分股資金方向分歧</div><div>小而實＝齊步；大而糊＝板塊內輪動與分化。</div></div><div class="mini"><div class="k">⚑ 標記</div><div class="v">低於流動性門檻</div><div>小板塊的強度與 z 值可能較容易失真，只作輔助參考。</div></div></div></section>
+<section class="card"><h2>三、四象限判讀</h2><h3 class="red">右上：流入且異常熱</h3><p>資金方向與異常度同時偏強，優先檢查是否為板塊性行情。若光暈很大，仍需點進去確認是不是只有少數個股拉動。</p><h3>右下：流入但不異常</h3><p>有資金挹注，但尚未明顯偏離近期常態，可能是穩定累積，也可能只是一般輪動。</p><h3>左上：流出但仍偏熱</h3><p>可能是高檔換手、前期熱門板塊出現資金鬆動，需搭配個股明細判斷。</p><h3 class="green">左下：流出且偏冷</h3><p>資金流出且相對自身近期更弱，通常屬於需要降低優先度的區域。</p></section>
+<section class="card"><h2>四、實際操作方式</h2><ol><li>先看右上角資料日期，確認是最新交易日。</li><li>先掃描右上與左下象限，辨識強流入與強流出板塊。</li><li>觀察光暈：同樣位於右上的板塊，光暈小者通常訊號更乾淨。</li><li>點擊泡泡或下方表格列，右側會顯示外資、投信、成交值與成分股淨流入排行。</li><li>點表格欄位標題，可依淨流入、強度、z 或成交值排序。</li><li>按播放鍵可回看近 20 日板塊資金輪動；歷史播放不顯示光暈，因歷史 JSON 沒有每日成分股明細。</li></ol></section>
+<section class="card"><h2>五、光暈的正確解讀</h2><p><strong>光暈不是券商分點集中度，也不是主力人數。</strong>它使用當日成分股淨流入方向計算板塊內部資金分歧：</p><ul><li><strong>0%</strong>：幾乎全部成分股同方向。</li><li><strong>接近 100%</strong>：流入與流出金額接近對半，板塊內部輪動明顯。</li><li>光暈大時，板塊平均值可能掩蓋內部強弱差異，必須點進去看個股。</li></ul></section>
+<section class="card"><h2>六、使用限制</h2><ul><li>本系統是盤後法人資金工具，不是盤中即時報價。</li><li>目前第一階段未包含券商分點、買賣家數差、5 日／20 日分點集中度。</li><li>板塊成分股可重複出現在不同主題，這是設計的一部分；每個板塊視為獨立觀察鏡頭。</li><li>所有指標應搭配價格趨勢、基本面與風險控管，不構成投資建議。</li></ul></section>
+<div class="foot">FinMind_Project｜盤後板塊法人資金觀察工具</div>
+</main></body></html>
