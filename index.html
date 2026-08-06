@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FinMind_Project｜板塊資金儀表板</title>
+<style>
+:root{--bg:#09131c;--panel:#10202c;--line:#22384a;--ink:#e8f1f6;--dim:#8aa3b4;--amber:#f4b53f}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;display:grid;place-items:center;padding:20px;background:radial-gradient(900px 600px at 80% 0,#153047 0,transparent 62%),var(--bg);color:var(--ink);font-family:"Noto Sans TC","Segoe UI",system-ui,sans-serif}
+.card{width:min(680px,100%);background:linear-gradient(180deg,var(--panel),#0d1a24);border:1px solid var(--line);border-radius:18px;padding:30px;box-shadow:0 24px 80px rgba(0,0,0,.25)}
+.eyebrow{color:var(--amber);font-weight:800;letter-spacing:.08em;font-size:12px}
+h1{font-size:30px;margin:8px 0 10px}
+p{color:var(--dim);line-height:1.7}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px}
+a{display:flex;align-items:center;justify-content:center;text-decoration:none;border-radius:11px;padding:14px;font-weight:800}
+.primary{background:var(--amber);color:#1b1609}
+.secondary{border:1px solid var(--line);color:var(--ink);background:#0b1821}
+.meta{margin-top:20px;padding-top:16px;border-top:1px solid var(--line);font-size:12px;color:var(--dim)}
+@media(max-width:560px){.actions{grid-template-columns:1fr}h1{font-size:24px}.card{padding:22px}}
+</style>
+</head>
+<body>
+<main class="card">
+  <div class="eyebrow">FINMIND PROJECT</div>
+  <h1>板塊資金儀表板</h1>
+  <p>盤後觀察 16 個自訂板塊的三大法人資金流向、挹注強度、異常度與板塊內部分歧。</p>
+  <div class="actions">
+    <a class="primary" href="./dashboard.html">開啟儀表板</a>
+    <a class="secondary" href="./guide.html">查看使用說明</a>
+  </div>
+  <div class="meta">資料由 GitHub Actions 自動更新。請以儀表板右上角的「資料日」確認最新狀態。</div>
+</main>
+</body>
+</html>
