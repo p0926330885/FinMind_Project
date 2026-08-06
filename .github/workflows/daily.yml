@@ -1,0 +1,38 @@
+name: Daily FinMind Pipeline
+
+on:
+  schedule:
+    # 台灣時間每天 15:30(UTC 07:30)自動執行,收盤後抓資料
+    - cron: '30 7 * * 1-5'
+  workflow_dispatch:   # 允許你在網頁上手動按按鈕執行
+
+permissions:
+  contents: write      # 允許把跑出來的資料存回倉庫
+
+jobs:
+  run-pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 取出程式碼
+        uses: actions/checkout@v4
+
+      - name: 安裝 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 安裝套件
+        run: pip install -r requirements.txt
+
+      - name: 執行管線
+        env:
+          FINMIND_TOKEN: ${{ secrets.FINMIND_TOKEN }}
+        run: python finmind_pipeline.py
+
+      - name: 把最新資料存回倉庫
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add data/bubble_data.json
+          git commit -m "自動更新資料" || echo "沒有變更"
+          git push
