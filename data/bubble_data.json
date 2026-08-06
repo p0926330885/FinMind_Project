@@ -1,0 +1,2941 @@
+{
+  "generated_at": "2026-08-06T17:00:13",
+  "as_of_date": "2026-08-06",
+  "phase": 1,
+  "note": "第一階段：法人資金主線（絕對/強度/z）。集中度/家數差待第二階段分點資料。",
+  "config": {
+    "weighting": "turnover",
+    "liquidity_floor_100m_twd": 3,
+    "history_days": 20,
+    "money_metrics": [
+      "abs_netflow",
+      "intensity",
+      "zscore"
+    ],
+    "flexible_par_note": "彈性面額不影響資金/籌碼計算,僅metadata"
+  },
+  "sectors": [
+    {
+      "name": "產業趨勢",
+      "netflow_100m": -41.929,
+      "netflow_foreign_100m": -117.44,
+      "netflow_trust_100m": 87.282,
+      "turnover_100m": 2799.758,
+      "intensity_pct": -1.5,
+      "zscore": 0.26,
+      "below_floor": false,
+      "members": [
+        {
+          "name": "奇鋐",
+          "code": "3017",
+          "netflow_100m": 94.305,
+          "turnover_100m": 272.196
+        },
+        {
+          "name": "智邦",
+          "code": "2345",
+          "netflow_100m": 12.259,
+          "turnover_100m": 99.939
+        },
+        {
+          "name": "台達電",
+          "code": "2308",
+          "netflow_100m": 9.921,
+          "turnover_100m": 182.009
+        },
+        {
+          "name": "貿聯-KY",
+          "code": "3665",
+          "netflow_100m": 8.941,
+          "turnover_100m": 121.152
+        },
+        {
+          "name": "信驊",
+          "code": "5274",
+          "netflow_100m": 7.893,
+          "turnover_100m": 61.115
+        },
+        {
+          "name": "致茂",
+          "code": "2360",
+          "netflow_100m": 6.482,
+          "turnover_100m": 56.959
+        },
+        {
+          "name": "富世達",
+          "code": "6805",
+          "netflow_100m": 3.187,
+          "turnover_100m": 54.477
+        },
+        {
+          "name": "台光電",
+          "code": "2383",
+          "netflow_100m": 3.023,
+          "turnover_100m": 98.424
+        },
+        {
+          "name": "嘉澤",
+          "code": "3533",
+          "netflow_100m": 2.677,
+          "turnover_100m": 17.209
+        },
+        {
+          "name": "萬潤",
+          "code": "6187",
+          "netflow_100m": 2.343,
+          "turnover_100m": 49.908
+        },
+        {
+          "name": "創意",
+          "code": "3443",
+          "netflow_100m": 1.175,
+          "turnover_100m": 82.407
+        },
+        {
+          "name": "尖點",
+          "code": "8021",
+          "netflow_100m": 0.498,
+          "turnover_100m": 41.265
+        },
+        {
+          "name": "鉅祥",
+          "code": "2476",
+          "netflow_100m": 0.463,
+          "turnover_100m": 2.356
+        },
+        {
+          "name": "今國光",
+          "code": "6209",
+          "netflow_100m": 0.419,
+          "turnover_100m": 5.652
+        },
+        {
+          "name": "弘塑",
+          "code": "3131",
+          "netflow_100m": 0.329,
+          "turnover_100m": 33.241
+        },
+        {
+          "name": "竹陞科技",
+          "code": "6739",
+          "netflow_100m": 0.086,
+          "turnover_100m": 1.556
+        },
+        {
+          "name": "智伸科",
+          "code": "4551",
+          "netflow_100m": -0.188,
+          "turnover_100m": 1.659
+        },
+        {
+          "name": "欣興",
+          "code": "3037",
+          "netflow_100m": -0.602,
+          "turnover_100m": 248.871
+        },
+        {
+          "name": "景碩",
+          "code": "3189",
+          "netflow_100m": -0.862,
+          "turnover_100m": 194.81
+        },
+        {
+          "name": "凡甲",
+          "code": "3526",
+          "netflow_100m": -1.011,
+          "turnover_100m": 2.004
+        },
+        {
+          "name": "南電",
+          "code": "8046",
+          "netflow_100m": -1.854,
+          "turnover_100m": 40.046
+        },
+        {
+          "name": "健策",
+          "code": "3653",
+          "netflow_100m": -2.51,
+          "turnover_100m": 94.974
+        },
+        {
+          "name": "頎邦",
+          "code": "6147",
+          "netflow_100m": -10.347,
+          "turnover_100m": 43.395
+        },
+        {
+          "name": "日月光投控",
+          "code": "3711",
+          "netflow_100m": -20.983,
+          "turnover_100m": 102.941
+        },
+        {
+          "name": "聯發科",
+          "code": "2454",
+          "netflow_100m": -46.578,
+          "turnover_100m": 285.184
+        },
+        {
+          "name": "台積電",
+          "code": "2330",
+          "netflow_100m": -110.994,
+          "turnover_100m": 606.007
+        }
+      ],
+      "history": [
+        {
+          "date": "2026-07-09",
+          "netflow_100m": -339.483,
+          "intensity_pct": -12.09
+        },
+        {
+          "date": "2026-07-13",
+          "netflow_100m": -68.854,
+          "intensity_pct": -2.45
+        },
+        {
+          "date": "2026-07-14",
+          "netflow_100m": -255.985,
+          "intensity_pct": -8.12
+        },
+        {
+          "date": "2026-07-15",
+          "netflow_100m": -69.927,
+          "intensity_pct": -2.65
+        },
+        {
+          "date": "2026-07-16",
+          "netflow_100m": -166.965,
+          "intensity_pct": -7.09
+        },
+        {
+          "date": "2026-07-17",
+          "netflow_100m": -1137.478,
+          "intensity_pct": -26.04
+        },
+        {
+          "date": "2026-07-20",
+          "netflow_100m": 154.664,
+          "intensity_pct": 4.64
+        },
+        {
+          "date": "2026-07-21",
+          "netflow_100m": 93.869,
+          "intensity_pct": 3.81
+        },
+        {
+          "date": "2026-07-22",
+          "netflow_100m": -52.36,
+          "intensity_pct": -1.65
+        },
+        {
+          "date": "2026-07-23",
+          "netflow_100m": 13.058,
+          "intensity_pct": 0.49
+        },
+        {
+          "date": "2026-07-24",
+          "netflow_100m": -355.588,
+          "intensity_pct": -15.8
+        },
+        {
+          "date": "2026-07-27",
+          "netflow_100m": -47.435,
+          "intensity_pct": -2.13
+        },
+        {
+          "date": "2026-07-28",
+          "netflow_100m": -384.548,
+          "intensity_pct": -12.8
+        },
+        {
+          "date": "2026-07-29",
+          "netflow_100m": -117.658,
+          "intensity_pct": -3.11
+        },
+        {
+          "date": "2026-07-30",
+          "netflow_100m": -156.159,
+          "intensity_pct": -3.94
+        },
+        {
+          "date": "2026-07-31",
+          "netflow_100m": 412.721,
+          "intensity_pct": 14.17
+        },
+        {
+          "date": "2026-08-03",
+          "netflow_100m": -203.144,
+          "intensity_pct": -7.44
+        },
+        {
+          "date": "2026-08-04",
+          "netflow_100m": -203.879,
+          "intensity_pct": -5.2
+        },
+        {
+          "date": "2026-08-05",
+          "netflow_100m": 489.997,
+          "intensity_pct": 13.23
+        },
+        {
+          "date": "2026-08-06",
+          "netflow_100m": -41.929,
+          "intensity_pct": -1.5
+        }
+      ]
+    },
+    {
+      "name": "半導體上游",
+      "netflow_100m": -134.542,
+      "netflow_foreign_100m": -94.152,
+      "netflow_trust_100m": -29.368,
+      "turnover_100m": 1127.099,
+      "intensity_pct": -11.94,
+      "zscore": 0.02,
+      "below_floor": false,
+      "members": [
+        {
+          "name": "聯電",
+          "code": "2303",
+          "netflow_100m": 11.286,
+          "turnover_100m": 179.342
+        },
+        {
+          "name": "環球晶",
+          "code": "6488",
+          "netflow_100m": 4.912,
+          "turnover_100m": 96.115
+        },
+        {
+          "name": "中砂",
+          "code": "1560",
+          "netflow_100m": 1.476,
+          "turnover_100m": 6.038
+        },
+        {
+          "name": "台星科",
+          "code": "3265",
+          "netflow_100m": -0.2,
+          "turnover_100m": 1.922
+        },
+        {
+          "name": "矽格",
+          "code": "6257",
+          "netflow_100m": -0.402,
+          "turnover_100m": 7.413
+        },
+        {
+          "name": "欣銓",
+          "code": "3264",
+          "netflow_100m": -0.583,
+          "turnover_100m": 18.963
+        },
+        {
+          "name": "京元電子",
+          "code": "2449",
+          "netflow_100m": -3.085,
+          "turnover_100m": 37.19
+        },
+        {
+          "name": "昇陽半導體",
+          "code": "8028",
+          "netflow_100m": -5.557,
+          "turnover_100m": 15.354
+        },
+        {
+          "name": "世界",
+          "code": "5347",
+          "netflow_100m": -10.414,
+          "turnover_100m": 55.813
+        },
+        {
+          "name": "日月光投控",
+          "code": "3711",
+          "netflow_100m": -20.983,
+          "turnover_100m": 102.941
+        },
+        {
+          "name": "台積電",
+          "code": "2330",
+          "netflow_100m": -110.994,
+          "turnover_100m": 606.007
+        }
+      ],
+      "history": [
+        {
+          "date": "2026-07-09",
+          "netflow_100m": -321.281,
+          "intensity_pct": -23.11
+        },
+        {
+          "date": "2026-07-13",
+          "netflow_100m": -74.717,
+          "intensity_pct": -5.5
+        },
+        {
+          "date": "2026-07-14",
+          "netflow_100m": -174.932,
+          "intensity_pct": -9.38
+        },
+        {
+          "date": "2026-07-15",
+          "netflow_100m": -28.162,
+          "intensity_pct": -1.82
+        },
+        {
+          "date": "2026-07-16",
+          "netflow_100m": -46.962,
+          "intensity_pct": -3.29
+        },
+        {
+          "date": "2026-07-17",
+          "netflow_100m": -1149.658,
+          "intensity_pct": -35.55
+        },
+        {
+          "date": "2026-07-20",
+          "netflow_100m": -7.819,
+          "intensity_pct": -0.35
+        },
+        {
+          "date": "2026-07-21",
+          "netflow_100m": 104.267,
+          "intensity_pct": 7.02
+        },
+        {
+          "date": "2026-07-22",
+          "netflow_100m": -44.764,
+          "intensity_pct": -2.98
+        },
+        {
+          "date": "2026-07-23",
+          "netflow_100m": -152.235,
+          "intensity_pct": -13.23
+        },
+        {
+          "date": "2026-07-24",
+          "netflow_100m": -236.669,
+          "intensity_pct": -20.77
+        },
+        {
+          "date": "2026-07-27",
+          "netflow_100m": -2.988,
+          "intensity_pct": -0.24
+        },
+        {
+          "date": "2026-07-28",
+          "netflow_100m": -255.553,
+          "intensity_pct": -16.44
+        },
+        {
+          "date": "2026-07-29",
+          "netflow_100m": -103.419,
+          "intensity_pct": -4.92
+        },
+        {
+          "date": "2026-07-30",
+          "netflow_100m": -101.546,
+          "intensity_pct": -5.12
+        },
+        {
+          "date": "2026-07-31",
+          "netflow_100m": 492.528,
+          "intensity_pct": 24.3
+        },
+        {
+          "date": "2026-08-03",
+          "netflow_100m": -340.54,
+          "intensity_pct": -20.3
+        },
+        {
+          "date": "2026-08-04",
+          "netflow_100m": -431.88,
+          "intensity_pct": -25.34
+        },
+        {
+          "date": "2026-08-05",
+          "netflow_100m": 174.858,
+          "intensity_pct": 9.63
+        },
+        {
+          "date": "2026-08-06",
+          "netflow_100m": -134.542,
+          "intensity_pct": -11.94
+        }
+      ]
+    },
+    {
+      "name": "ABF BT",
+      "netflow_100m": -4.039,
+      "netflow_foreign_100m": -41.7,
+      "netflow_trust_100m": 38.863,
+      "turnover_100m": 730.828,
+      "intensity_pct": -0.55,
+      "zscore": -0.04,
+      "below_floor": false,
+      "members": [
+        {
+          "name": "達航科技",
+          "code": "4577",
+          "netflow_100m": -0.057,
+          "turnover_100m": 0.414
+        },
+        {
+          "name": "大量",
+          "code": "3167",
+          "netflow_100m": -0.137,
+          "turnover_100m": 6.221
+        },
+        {
+          "name": "臻鼎-KY",
+          "code": "4958",
+          "netflow_100m": -0.527,
+          "turnover_100m": 240.466
+        },
+        {
+          "name": "欣興",
+          "code": "3037",
+          "netflow_100m": -0.602,
+          "turnover_100m": 248.871
+        },
+        {
+          "name": "景碩",
+          "code": "3189",
+          "netflow_100m": -0.862,
+          "turnover_100m": 194.81
+        },
+        {
+          "name": "南電",
+          "code": "8046",
+          "netflow_100m": -1.854,
+          "turnover_100m": 40.046
+        }
+      ],
+      "history": [
+        {
+          "date": "2026-07-09",
+          "netflow_100m": 15.32,
+          "intensity_pct": 1.85
+        },
+        {
+          "date": "2026-07-13",
+          "netflow_100m": 183.234,
+          "intensity_pct": 15.69
+        },
+        {
+          "date": "2026-07-14",
+          "netflow_100m": -30.748,
+          "intensity_pct": -3.17
+        },
+        {
+          "date": "2026-07-15",
+          "netflow_100m": -68.799,
+          "intensity_pct": -6.45
+        },
+        {
+          "date": "2026-07-16",
+          "netflow_100m": -118.511,
+          "intensity_pct": -15.64
+        },
+        {
+          "date": "2026-07-17",
+          "netflow_100m": -37.6,
+          "intensity_pct": -6.26
+        },
+        {
+          "date": "2026-07-20",
+          "netflow_100m": 53.731,
+          "intensity_pct": 6.74
+        },
+        {
+          "date": "2026-07-21",
+          "netflow_100m": -60.251,
+          "intensity_pct": -9.34
+        },
+        {
+          "date": "2026-07-22",
+          "netflow_100m": 7.799,
+          "intensity_pct": 0.83
+        },
+        {
+          "date": "2026-07-23",
+          "netflow_100m": -46.741,
+          "intensity_pct": -5.31
+        },
+        {
+          "date": "2026-07-24",
+          "netflow_100m": -44.505,
+          "intensity_pct": -7.79
+        },
+        {
+          "date": "2026-07-27",
+          "netflow_100m": -5.985,
+          "intensity_pct": -1.18
+        },
+        {
+          "date": "2026-07-28",
+          "netflow_100m": 14.495,
+          "intensity_pct": 2.6
+        },
+        {
+          "date": "2026-07-29",
+          "netflow_100m": 1.669,
+          "intensity_pct": 0.27
+        },
+        {
+          "date": "2026-07-30",
+          "netflow_100m": -27.974,
+          "intensity_pct": -2.36
+        },
+        {
+          "date": "2026-07-31",
+          "netflow_100m": -5.11,
+          "intensity_pct": -4.1
+        },
+        {
+          "date": "2026-08-03",
+          "netflow_100m": -4.796,
+          "intensity_pct": -0.91
+        },
+        {
+          "date": "2026-08-04",
+          "netflow_100m": 42.135,
+          "intensity_pct": 5.59
+        },
+        {
+          "date": "2026-08-05",
+          "netflow_100m": 133.19,
+          "intensity_pct": 14.84
+        },
+        {
+          "date": "2026-08-06",
+          "netflow_100m": -4.039,
+          "intensity_pct": -0.55
+        }
+      ]
+    },
+    {
+      "name": "CPU IC設計",
+      "netflow_100m": -45.403,
+      "netflow_foreign_100m": -40.072,
+      "netflow_trust_100m": -1.521,
+      "turnover_100m": 367.591,
+      "intensity_pct": -12.35,
+      "zscore": -0.94,
+      "below_floor": false,
+      "members": [
+        {
+          "name": "創意",
+          "code": "3443",
+          "netflow_100m": 1.175,
+          "turnover_100m": 82.407
+        },
+        {
+          "name": "聯發科",
+          "code": "2454",
+          "netflow_100m": -46.578,
+          "turnover_100m": 285.184
+        }
+      ],
+      "history": [
+        {
+          "date": "2026-07-09",
+          "netflow_100m": -38.876,
+          "intensity_pct": -10.38
+        },
+        {
+          "date": "2026-07-13",
+          "netflow_100m": -24.495,
+          "intensity_pct": -7.03
+        },
+        {
+          "date": "2026-07-14",
+          "netflow_100m": -15.2,
+          "intensity_pct": -2.68
+        },
+        {
+          "date": "2026-07-15",
+          "netflow_100m": -25.918,
+          "intensity_pct": -7.62
+        },
+        {
+          "date": "2026-07-16",
+          "netflow_100m": -22.968,
+          "intensity_pct": -8.94
+        },
+        {
+          "date": "2026-07-17",
+          "netflow_100m": -19.785,
+          "intensity_pct": -4.2
+        },
+        {
+          "date": "2026-07-20",
+          "netflow_100m": 38.113,
+          "intensity_pct": 10.15
+        },
+        {
+          "date": "2026-07-21",
+          "netflow_100m": -23.03,
+          "intensity_pct": -6.92
+        },
+        {
+          "date": "2026-07-22",
+          "netflow_100m": 6.141,
+          "intensity_pct": 0.95
+        },
+        {
+          "date": "2026-07-23",
+          "netflow_100m": 43.11,
+          "intensity_pct": 10.97
+        },
+        {
+          "date": "2026-07-24",
+          "netflow_100m": -26.264,
+          "intensity_pct": -6.15
+        },
+        {
+          "date": "2026-07-27",
+          "netflow_100m": -30.147,
+          "intensity_pct": -7.49
+        },
+        {
+          "date": "2026-07-28",
+          "netflow_100m": -66.241,
+          "intensity_pct": -13.52
+        },
+        {
+          "date": "2026-07-29",
+          "netflow_100m": 3.614,
+          "intensity_pct": 0.62
+        },
+        {
+          "date": "2026-07-30",
+          "netflow_100m": -68.768,
+          "intensity_pct": -12.11
+        },
+        {
+          "date": "2026-07-31",
+          "netflow_100m": -44.89,
+          "intensity_pct": -26.11
+        },
+        {
+          "date": "2026-08-03",
+          "netflow_100m": 72.381,
+          "intensity_pct": 20.84
+        },
+        {
+          "date": "2026-08-04",
+          "netflow_100m": 39.494,
+          "intensity_pct": 4.92
+        },
+        {
+          "date": "2026-08-05",
+          "netflow_100m": 70.16,
+          "intensity_pct": 11.29
+        },
+        {
+          "date": "2026-08-06",
+          "netflow_100m": -45.403,
+          "intensity_pct": -12.35
+        }
+      ]
+    },
+    {
+      "name": "散熱 HVDC",
+      "netflow_100m": 126.821,
+      "netflow_foreign_100m": 63.167,
+      "netflow_trust_100m": 56.812,
+      "turnover_100m": 822.684,
+      "intensity_pct": 15.42,
+      "zscore": 3.1,
+      "below_floor": false,
+      "members": [
+        {
+          "name": "奇鋐",
+          "code": "3017",
+          "netflow_100m": 94.305,
+          "turnover_100m": 272.196
+        },
+        {
+          "name": "雙鴻",
+          "code": "3324",
+          "netflow_100m": 19.925,
+          "turnover_100m": 81.045
+        },
+        {
+          "name": "台達電",
+          "code": "2308",
+          "netflow_100m": 9.921,
+          "turnover_100m": 182.009
+        },
+        {
+          "name": "貿聯-KY",
+          "code": "3665",
+          "netflow_100m": 8.941,
+          "turnover_100m": 121.152
+        },
+        {
+          "name": "富世達",
+          "code": "6805",
+          "netflow_100m": 3.187,
+          "turnover_100m": 54.477
+        },
+        {
+          "name": "松川精密",
+          "code": "7788",
+          "netflow_100m": 0.034,
+          "turnover_100m": 2.179
+        },
+        {
+          "name": "西勝",
+          "code": "3625",
+          "netflow_100m": 0.0,
+          "turnover_100m": 0.021
+        },
+        {
+          "name": "AES-KY",
+          "code": "6781",
+          "netflow_100m": -0.017,
+          "turnover_100m": 11.252
+        },
+        {
+          "name": "瀚荃",
+          "code": "8103",
+          "netflow_100m": -0.091,
+          "turnover_100m": 0.845
+        },
+        {
+          "name": "新盛力",
+          "code": "4931",
+          "netflow_100m": -1.182,
+          "turnover_100m": 12.455
+        },
+        {
+          "name": "順達",
+          "code": "3211",
+          "netflow_100m": -2.262,
+          "turnover_100m": 36.738
+        },
+        {
+          "name": "高力",
+          "code": "8996",
+          "netflow_100m": -5.941,
+          "turnover_100m": 48.313
+        }
+      ],
+      "history": [
+        {
+          "date": "2026-07-09",
+          "netflow_100m": 13.391,
+          "intensity_pct": 2.58
+        },
+        {
+          "date": "2026-07-13",
+          "netflow_100m": -19.573,
+          "intensity_pct": -4.65
+        },
+        {
+          "date": "2026-07-14",
+          "netflow_100m": -26.542,
+          "intensity_pct": -5.48
+        },
+        {
+          "date": "2026-07-15",
+          "netflow_100m": -13.068,
+          "intensity_pct": -3.58
+        },
+        {
+          "date": "2026-07-16",
+          "netflow_100m": -17.25,
+          "intensity_pct": -4.49
+        },
+        {
+          "date": "2026-07-17",
+          "netflow_100m": -84.919,
+          "intensity_pct": -15.06
+        },
+        {
+          "date": "2026-07-20",
+          "netflow_100m": -11.039,
+          "intensity_pct": -2.37
+        },
+        {
+          "date": "2026-07-21",
+          "netflow_100m": 16.456,
+          "intensity_pct": 3.93
+        },
+        {
+          "date": "2026-07-22",
+          "netflow_100m": -10.085,
+          "intensity_pct": -1.94
+        },
+        {
+          "date": "2026-07-23",
+          "netflow_100m": 77.159,
+          "intensity_pct": 14.06
+        },
+        {
+          "date": "2026-07-24",
+          "netflow_100m": -20.973,
+          "intensity_pct": -5.1
+        },
+        {
+          "date": "2026-07-27",
+          "netflow_100m": -13.393,
+          "intensity_pct": -3.89
+        },
+        {
+          "date": "2026-07-28",
+          "netflow_100m": -87.562,
+          "intensity_pct": -17.49
+        },
+        {
+          "date": "2026-07-29",
+          "netflow_100m": 24.543,
+          "intensity_pct": 3.55
+        },
+        {
+          "date": "2026-07-30",
+          "netflow_100m": -13.729,
+          "intensity_pct": -2.17
+        },
+        {
+          "date": "2026-07-31",
+          "netflow_100m": -50.919,
+          "intensity_pct": -7.36
+        },
+        {
+          "date": "2026-08-03",
+          "netflow_100m": -31.916,
+          "intensity_pct": -5.37
+        },
+        {
+          "date": "2026-08-04",
+          "netflow_100m": 78.831,
+          "intensity_pct": 11.31
+        },
+        {
+          "date": "2026-08-05",
+          "netflow_100m": 62.349,
+          "intensity_pct": 8.63
+        },
+        {
+          "date": "2026-08-06",
+          "netflow_100m": 126.821,
+          "intensity_pct": 15.42
+        }
+      ]
+    },
+    {
+      "name": "半導體設備",
+      "netflow_100m": 6.539,
+      "netflow_foreign_100m": 27.9,
+      "netflow_trust_100m": -22.548,
+      "turnover_100m": 202.65,
+      "intensity_pct": 3.23,
+      "zscore": 0.64,
+      "below_floor": false,
+      "members": [
+        {
+          "name": "致茂",
+          "code": "2360",
+          "netflow_100m": 6.482,
+          "turnover_100m": 56.959
+        },
+        {
+          "name": "萬潤",
+          "code": "6187",
+          "netflow_100m": 2.343,
+          "turnover_100m": 49.908
+        },
+        {
+          "name": "辛耘",
+          "code": "3583",
+          "netflow_100m": 1.138,
+          "turnover_100m": 6.294
+        },
+        {
+          "name": "竑騰",
+          "code": "7751",
+          "netflow_100m": 0.467,
+          "turnover_100m": 3.404
+        },
+        {
+          "name": "東捷",
+          "code": "8064",
+          "netflow_100m": 0.352,
+          "turnover_100m": 1.88
+        },
+        {
+          "name": "均華",
+          "code": "6640",
+          "netflow_100m": 0.334,
+          "turnover_100m": 1.656
+        },
+        {
+          "name": "弘塑",
+          "code": "3131",
+          "netflow_100m": 0.329,
+          "turnover_100m": 33.241
+        },
+        {
+          "name": "竹陞科技",
+          "code": "6739",
+          "netflow_100m": 0.086,
+          "turnover_100m": 1.556
+        },
+        {
+          "name": "德律",
+          "code": "3030",
+          "netflow_100m": 0.071,
+          "turnover_100m": 2.922
+        },
+        {
+          "name": "均豪",
+          "code": "5443",
+          "netflow_100m": 0.018,
+          "turnover_100m": 0.663
+        },
+        {
+          "name": "港建",
+          "code": "3093",
+          "netflow_100m": -0.01,
+          "turnover_100m": 0.158
+        },
+        {
+          "name": "志聖",
+          "code": "2467",
+          "netflow_100m": -0.098,
+          "turnover_100m": 4.277
+        },
+        {
+          "name": "牧德",
+          "code": "3563",
+          "netflow_100m": -0.112,
+          "turnover_100m": 3.977
+        },
+        {
+          "name": "印能科技",
+          "code": "7734",
+          "netflow_100m": -0.747,
+          "turnover_100m": 5.342
+        },
+        {
+          "name": "鴻勁",
+          "code": "7769",
+          "netflow_100m": -4.114,
+          "turnover_100m": 30.412
+        }
+      ],
+      "history": [
+        {
+          "date": "2026-07-09",
+          "netflow_100m": 13.85,
+          "intensity_pct": 7.1
+        },
+        {
+          "date": "2026-07-13",
+          "netflow_100m": -3.669,
+          "intensity_pct": -1.7
+        },
+        {
+          "date": "2026-07-14",
+          "netflow_100m": 3.283,
+          "intensity_pct": 1.62
+        },
+        {
+          "date": "2026-07-15",
+          "netflow_100m": 11.488,
+          "intensity_pct": 6.31
+        },
+        {
+          "date": "2026-07-16",
+          "netflow_100m": -0.285,
+          "intensity_pct": -0.12
+        },
+        {
+          "date": "2026-07-17",
+          "netflow_100m": -26.616,
+          "intensity_pct": -11.22
+        },
+        {
+          "date": "2026-07-20",
+          "netflow_100m": 6.551,
+          "intensity_pct": 3.81
+        },
+        {
+          "date": "2026-07-21",
+          "netflow_100m": -3.493,
+          "intensity_pct": -2.03
+        },
+        {
+          "date": "2026-07-22",
+          "netflow_100m": 10.054,
+          "intensity_pct": 4.7
+        },
+        {
+          "date": "2026-07-23",
+          "netflow_100m": -0.426,
+          "intensity_pct": -0.29
+        },
+        {
+          "date": "2026-07-24",
+          "netflow_100m": -15.83,
+          "intensity_pct": -9.19
+        },
+        {
+          "date": "2026-07-27",
+          "netflow_100m": 5.982,
+          "intensity_pct": 3.6
+        },
+        {
+          "date": "2026-07-28",
+          "netflow_100m": 9.363,
+          "intensity_pct": 4.95
+        },
+        {
+          "date": "2026-07-29",
+          "netflow_100m": -1.884,
+          "intensity_pct": -0.84
+        },
+        {
+          "date": "2026-07-30",
+          "netflow_100m": 5.6,
+          "intensity_pct": 2.12
+        },
+        {
+          "date": "2026-07-31",
+          "netflow_100m": -18.958,
+          "intensity_pct": -9.29
+        },
+        {
+          "date": "2026-08-03",
+          "netflow_100m": 0.038,
+          "intensity_pct": 0.01
+        },
+        {
+          "date": "2026-08-04",
+          "netflow_100m": -4.76,
+          "intensity_pct": -1.84
+        },
+        {
+          "date": "2026-08-05",
+          "netflow_100m": -2.002,
+          "intensity_pct": -0.83
+        },
+        {
+          "date": "2026-08-06",
+          "netflow_100m": 6.539,
+          "intensity_pct": 3.23
+        }
+      ]
+    },
+    {
+      "name": "PCB相關",
+      "netflow_100m": 13.15,
+      "netflow_foreign_100m": 4.154,
+      "netflow_trust_100m": 6.851,
+      "turnover_100m": 467.507,
+      "intensity_pct": 2.81,
+      "zscore": 0.76,
+      "below_floor": false,
+      "members": [
+        {
+          "name": "華通",
+          "code": "2313",
+          "netflow_100m": 16.455,
+          "turnover_100m": 104.938
+        },
+        {
+          "name": "台虹",
+          "code": "8039",
+          "netflow_100m": 4.269,
+          "turnover_100m": 64.857
+        },
+        {
+          "name": "聯茂",
+          "code": "6213",
+          "netflow_100m": 1.115,
+          "turnover_100m": 109.521
+        },
+        {
+          "name": "長廣",
+          "code": "7795",
+          "netflow_100m": 0.655,
+          "turnover_100m": 3.078
+        },
+        {
+          "name": "尖點",
+          "code": "8021",
+          "netflow_100m": 0.498,
+          "turnover_100m": 41.265
+        },
+        {
+          "name": "燿華",
+          "code": "2367",
+          "netflow_100m": 0.412,
+          "turnover_100m": 2.85
+        },
+        {
+          "name": "楠梓電",
+          "code": "2316",
+          "netflow_100m": 0.283,
+          "turnover_100m": 3.164
+        },
+        {
+          "name": "凱崴",
+          "code": "5498",
+          "netflow_100m": 0.034,
+          "turnover_100m": 1.122
+        },
+        {
+          "name": "群翊",
+          "code": "6664",
+          "netflow_100m": -0.035,
+          "turnover_100m": 0.534
+        },
+        {
+          "name": "瀚宇博",
+          "code": "5469",
+          "netflow_100m": -0.084,
+          "turnover_100m": 0.965
+        },
+        {
+          "name": "精成科",
+          "code": "6191",
+          "netflow_100m": -0.149,
+          "turnover_100m": 2.125
+        },
+        {
+          "name": "高技",
+          "code": "5439",
+          "netflow_100m": -1.104,
+          "turnover_100m": 7.215
+        },
+        {
+          "name": "金像電",
+          "code": "2368",
+          "netflow_100m": -9.199,
+          "turnover_100m": 125.872
+        }
+      ],
+      "history": [
+        {
+          "date": "2026-07-09",
+          "netflow_100m": -20.311,
+          "intensity_pct": -5.9
+        },
+        {
+          "date": "2026-07-13",
+          "netflow_100m": 27.313,
+          "intensity_pct": 7.56
+        },
+        {
+          "date": "2026-07-14",
+          "netflow_100m": 34.129,
+          "intensity_pct": 8.9
+        },
+        {
+          "date": "2026-07-15",
+          "netflow_100m": 32.947,
+          "intensity_pct": 8.55
+        },
+        {
+          "date": "2026-07-16",
+          "netflow_100m": -10.986,
+          "intensity_pct": -4.24
+        },
+        {
+          "date": "2026-07-17",
+          "netflow_100m": -13.768,
+          "intensity_pct": -3.72
+        },
+        {
+          "date": "2026-07-20",
+          "netflow_100m": -11.666,
+          "intensity_pct": -2.86
+        },
+        {
+          "date": "2026-07-21",
+          "netflow_100m": -4.808,
+          "intensity_pct": -2.25
+        },
+        {
+          "date": "2026-07-22",
+          "netflow_100m": -40.881,
+          "intensity_pct": -10.89
+        },
+        {
+          "date": "2026-07-23",
+          "netflow_100m": -12.411,
+          "intensity_pct": -3.08
+        },
+        {
+          "date": "2026-07-24",
+          "netflow_100m": -19.959,
+          "intensity_pct": -6.14
+        },
+        {
+          "date": "2026-07-27",
+          "netflow_100m": -3.342,
+          "intensity_pct": -1.24
+        },
+        {
+          "date": "2026-07-28",
+          "netflow_100m": 19.169,
+          "intensity_pct": 9.45
+        },
+        {
+          "date": "2026-07-29",
+          "netflow_100m": 26.899,
+          "intensity_pct": 12.05
+        },
+        {
+          "date": "2026-07-30",
+          "netflow_100m": -13.189,
+          "intensity_pct": -4.41
+        },
+        {
+          "date": "2026-07-31",
+          "netflow_100m": -2.754,
+          "intensity_pct": -2.05
+        },
+        {
+          "date": "2026-08-03",
+          "netflow_100m": -2.084,
+          "intensity_pct": -1.19
+        },
+        {
+          "date": "2026-08-04",
+          "netflow_100m": -3.043,
+          "intensity_pct": -0.8
+        },
+        {
+          "date": "2026-08-05",
+          "netflow_100m": -1.747,
+          "intensity_pct": -0.48
+        },
+        {
+          "date": "2026-08-06",
+          "netflow_100m": 13.15,
+          "intensity_pct": 2.81
+        }
+      ]
+    },
+    {
+      "name": "被動元件",
+      "netflow_100m": -40.034,
+      "netflow_foreign_100m": -30.533,
+      "netflow_trust_100m": -11.592,
+      "turnover_100m": 409.524,
+      "intensity_pct": -9.78,
+      "zscore": -0.85,
+      "below_floor": false,
+      "members": [
+        {
+          "name": "蜜望實",
+          "code": "8043",
+          "netflow_100m": 0.566,
+          "turnover_100m": 4.431
+        },
+        {
+          "name": "凱美",
+          "code": "2375",
+          "netflow_100m": 0.431,
+          "turnover_100m": 2.702
+        },
+        {
+          "name": "立敦",
+          "code": "6175",
+          "netflow_100m": 0.119,
+          "turnover_100m": 0.726
+        },
+        {
+          "name": "興勤",
+          "code": "2428",
+          "netflow_100m": 0.076,
+          "turnover_100m": 1.533
+        },
+        {
+          "name": "鈺邦",
+          "code": "6449",
+          "netflow_100m": -0.019,
+          "turnover_100m": 2.042
+        },
+        {
+          "name": "臺慶科",
+          "code": "3357",
+          "netflow_100m": -0.03,
+          "turnover_100m": 3.4
+        },
+        {
+          "name": "禾伸堂",
+          "code": "3026",
+          "netflow_100m": -0.061,
+          "turnover_100m": 10.177
+        },
+        {
+          "name": "立隆電",
+          "code": "2472",
+          "netflow_100m": -0.074,
+          "turnover_100m": 8.608
+        },
+        {
+          "name": "勤凱",
+          "code": "4760",
+          "netflow_100m": -0.091,
+          "turnover_100m": 0.992
+        },
+        {
+          "name": "日電貿",
+          "code": "3090",
+          "netflow_100m": -0.303,
+          "turnover_100m": 14.202
+        },
+        {
+          "name": "華新科",
+          "code": "2492",
+          "netflow_100m": -8.419,
+          "turnover_100m": 63.509
+        },
+        {
+          "name": "國巨",
+          "code": "2327",
+          "netflow_100m": -32.231,
+          "turnover_100m": 297.202
+        }
+      ],
+      "history": [
+        {
+          "date": "2026-07-09",
+          "netflow_100m": -21.479,
+          "intensity_pct": -2.46
+        },
+        {
+          "date": "2026-07-13",
+          "netflow_100m": -19.16,
+          "intensity_pct": -2.06
+        },
+        {
+          "date": "2026-07-14",
+          "netflow_100m": 16.532,
+          "intensity_pct": 1.63
+        },
+        {
+          "date": "2026-07-15",
+          "netflow_100m": -98.921,
+          "intensity_pct": -13.75
+        },
+        {
+          "date": "2026-07-16",
+          "netflow_100m": -5.632,
+          "intensity_pct": -0.97
+        },
+        {
+          "date": "2026-07-17",
+          "netflow_100m": 0.4,
+          "intensity_pct": 0.08
+        },
+        {
+          "date": "2026-07-20",
+          "netflow_100m": 35.84,
+          "intensity_pct": 10.52
+        },
+        {
+          "date": "2026-07-21",
+          "netflow_100m": -38.459,
+          "intensity_pct": -4.52
+        },
+        {
+          "date": "2026-07-22",
+          "netflow_100m": -35.775,
+          "intensity_pct": -5.86
+        },
+        {
+          "date": "2026-07-23",
+          "netflow_100m": 4.768,
+          "intensity_pct": 0.98
+        },
+        {
+          "date": "2026-07-24",
+          "netflow_100m": 3.5,
+          "intensity_pct": 1.08
+        },
+        {
+          "date": "2026-07-27",
+          "netflow_100m": 3.127,
+          "intensity_pct": 0.76
+        },
+        {
+          "date": "2026-07-28",
+          "netflow_100m": -10.604,
+          "intensity_pct": -4.45
+        },
+        {
+          "date": "2026-07-29",
+          "netflow_100m": 2.554,
+          "intensity_pct": 0.79
+        },
+        {
+          "date": "2026-07-30",
+          "netflow_100m": -13.151,
+          "intensity_pct": -2.21
+        },
+        {
+          "date": "2026-07-31",
+          "netflow_100m": -16.996,
+          "intensity_pct": -19.26
+        },
+        {
+          "date": "2026-08-03",
+          "netflow_100m": 12.047,
+          "intensity_pct": 6.11
+        },
+        {
+          "date": "2026-08-04",
+          "netflow_100m": -52.188,
+          "intensity_pct": -7.26
+        },
+        {
+          "date": "2026-08-05",
+          "netflow_100m": -58.496,
+          "intensity_pct": -10.68
+        },
+        {
+          "date": "2026-08-06",
+          "netflow_100m": -40.034,
+          "intensity_pct": -9.78
+        }
+      ]
+    },
+    {
+      "name": "SIC Gan MOSE",
+      "netflow_100m": 7.498,
+      "netflow_foreign_100m": 8.011,
+      "netflow_trust_100m": -0.402,
+      "turnover_100m": 92.245,
+      "intensity_pct": 8.13,
+      "zscore": 1.01,
+      "below_floor": false,
+      "members": [
+        {
+          "name": "矽力-KY",
+          "code": "6415",
+          "netflow_100m": 3.342,
+          "turnover_100m": 15.168
+        },
+        {
+          "name": "新唐",
+          "code": "4919",
+          "netflow_100m": 1.751,
+          "turnover_100m": 13.031
+        },
+        {
+          "name": "強茂",
+          "code": "2481",
+          "netflow_100m": 1.394,
+          "turnover_100m": 34.716
+        },
+        {
+          "name": "雅特力-KY",
+          "code": "6907",
+          "netflow_100m": 0.489,
+          "turnover_100m": 4.698
+        },
+        {
+          "name": "富鼎",
+          "code": "8261",
+          "netflow_100m": 0.317,
+          "turnover_100m": 11.398
+        },
+        {
+          "name": "力智",
+          "code": "6719",
+          "netflow_100m": 0.315,
+          "turnover_100m": 1.938
+        },
+        {
+          "name": "大中",
+          "code": "6435",
+          "netflow_100m": 0.2,
+          "turnover_100m": 1.383
+        },
+        {
+          "name": "尼克森",
+          "code": "3317",
+          "netflow_100m": -0.001,
+          "turnover_100m": 0.397
+        },
+        {
+          "name": "台半",
+          "code": "5425",
+          "netflow_100m": -0.006,
+          "turnover_100m": 5.452
+        },
+        {
+          "name": "博盛半導體",
+          "code": "7712",
+          "netflow_100m": -0.017,
+          "turnover_100m": 0.533
+        },
+        {
+          "name": "德微",
+          "code": "3675",
+          "netflow_100m": -0.072,
+          "turnover_100m": 1.839
+        },
+        {
+          "name": "盛群",
+          "code": "6202",
+          "netflow_100m": -0.213,
+          "turnover_100m": 1.693
+        }
+      ],
+      "history": [
+        {
+          "date": "2026-07-09",
+          "netflow_100m": -4.742,
+          "intensity_pct": -3.61
+        },
+        {
+          "date": "2026-07-13",
+          "netflow_100m": -2.795,
+          "intensity_pct": -1.83
+        },
+        {
+          "date": "2026-07-14",
+          "netflow_100m": 15.63,
+          "intensity_pct": 8.44
+        },
+        {
+          "date": "2026-07-15",
+          "netflow_100m": -16.207,
+          "intensity_pct": -14.16
+        },
+        {
+          "date": "2026-07-16",
+          "netflow_100m": -4.644,
+          "intensity_pct": -4.25
+        },
+        {
+          "date": "2026-07-17",
+          "netflow_100m": 12.647,
+          "intensity_pct": 10.29
+        },
+        {
+          "date": "2026-07-20",
+          "netflow_100m": 10.433,
+          "intensity_pct": 10.3
+        },
+        {
+          "date": "2026-07-21",
+          "netflow_100m": -12.424,
+          "intensity_pct": -16.27
+        },
+        {
+          "date": "2026-07-22",
+          "netflow_100m": -19.884,
+          "intensity_pct": -19.98
+        },
+        {
+          "date": "2026-07-23",
+          "netflow_100m": -11.258,
+          "intensity_pct": -13.82
+        },
+        {
+          "date": "2026-07-24",
+          "netflow_100m": -0.535,
+          "intensity_pct": -0.84
+        },
+        {
+          "date": "2026-07-27",
+          "netflow_100m": 6.049,
+          "intensity_pct": 9.74
+        },
+        {
+          "date": "2026-07-28",
+          "netflow_100m": 6.082,
+          "intensity_pct": 9.01
+        },
+        {
+          "date": "2026-07-29",
+          "netflow_100m": 5.883,
+          "intensity_pct": 6.96
+        },
+        {
+          "date": "2026-07-30",
+          "netflow_100m": 2.282,
+          "intensity_pct": 2.66
+        },
+        {
+          "date": "2026-07-31",
+          "netflow_100m": -14.737,
+          "intensity_pct": -19.96
+        },
+        {
+          "date": "2026-08-03",
+          "netflow_100m": 0.88,
+          "intensity_pct": 1.06
+        },
+        {
+          "date": "2026-08-04",
+          "netflow_100m": -7.339,
+          "intensity_pct": -5.95
+        },
+        {
+          "date": "2026-08-05",
+          "netflow_100m": -11.152,
+          "intensity_pct": -8.49
+        },
+        {
+          "date": "2026-08-06",
+          "netflow_100m": 7.498,
+          "intensity_pct": 8.13
+        }
+      ]
+    },
+    {
+      "name": "光通光纖",
+      "netflow_100m": 17.389,
+      "netflow_foreign_100m": 8.727,
+      "netflow_trust_100m": 8.113,
+      "turnover_100m": 851.068,
+      "intensity_pct": 2.04,
+      "zscore": 0.76,
+      "below_floor": false,
+      "members": [
+        {
+          "name": "聯亞",
+          "code": "3081",
+          "netflow_100m": 31.221,
+          "turnover_100m": 119.954
+        },
+        {
+          "name": "全新",
+          "code": "2455",
+          "netflow_100m": 13.198,
+          "turnover_100m": 135.145
+        },
+        {
+          "name": "萬潤",
+          "code": "6187",
+          "netflow_100m": 2.343,
+          "turnover_100m": 49.908
+        },
+        {
+          "name": "希華",
+          "code": "2484",
+          "netflow_100m": 0.738,
+          "turnover_100m": 9.986
+        },
+        {
+          "name": "訊芯-KY",
+          "code": "6451",
+          "netflow_100m": 0.502,
+          "turnover_100m": 40.603
+        },
+        {
+          "name": "沛亨",
+          "code": "6291",
+          "netflow_100m": 0.091,
+          "turnover_100m": 1.758
+        },
+        {
+          "name": "毅嘉",
+          "code": "2402",
+          "netflow_100m": 0.077,
+          "turnover_100m": 0.737
+        },
+        {
+          "name": "崴寶",
+          "code": "7744",
+          "netflow_100m": 0.019,
+          "turnover_100m": 0.255
+        },
+        {
+          "name": "采鈺",
+          "code": "6789",
+          "netflow_100m": -0.139,
+          "turnover_100m": 4.848
+        },
+        {
+          "name": "台表科",
+          "code": "6278",
+          "netflow_100m": -0.372,
+          "turnover_100m": 14.833
+        },
+        {
+          "name": "惠特",
+          "code": "6706",
+          "netflow_100m": -0.799,
+          "turnover_100m": 3.831
+        },
+        {
+          "name": "穩懋",
+          "code": "3105",
+          "netflow_100m": -0.854,
+          "turnover_100m": 155.78
+        },
+        {
+          "name": "瑞軒",
+          "code": "2489",
+          "netflow_100m": -0.984,
+          "turnover_100m": 8.646
+        },
+        {
+          "name": "晶技",
+          "code": "3042",
+          "netflow_100m": -1.148,
+          "turnover_100m": 15.803
+        },
+        {
+          "name": "環宇-KY",
+          "code": "4991",
+          "netflow_100m": -1.362,
+          "turnover_100m": 7.518
+        },
+        {
+          "name": "光聖",
+          "code": "6442",
+          "netflow_100m": -4.097,
+          "turnover_100m": 47.811
+        },
+        {
+          "name": "大立光",
+          "code": "3008",
+          "netflow_100m": -4.984,
+          "turnover_100m": 106.551
+        },
+        {
+          "name": "波若威",
+          "code": "3163",
+          "netflow_100m": -5.713,
+          "turnover_100m": 83.708
+        },
+        {
+          "name": "頎邦",
+          "code": "6147",
+          "netflow_100m": -10.347,
+          "turnover_100m": 43.395
+        }
+      ],
+      "history": [
+        {
+          "date": "2026-07-09",
+          "netflow_100m": -30.68,
+          "intensity_pct": -6.1
+        },
+        {
+          "date": "2026-07-13",
+          "netflow_100m": 2.086,
+          "intensity_pct": 0.48
+        },
+        {
+          "date": "2026-07-14",
+          "netflow_100m": 37.843,
+          "intensity_pct": 6.16
+        },
+        {
+          "date": "2026-07-15",
+          "netflow_100m": -52.901,
+          "intensity_pct": -11.44
+        },
+        {
+          "date": "2026-07-16",
+          "netflow_100m": -2.072,
+          "intensity_pct": -0.46
+        },
+        {
+          "date": "2026-07-17",
+          "netflow_100m": 27.214,
+          "intensity_pct": 6.91
+        },
+        {
+          "date": "2026-07-20",
+          "netflow_100m": 47.591,
+          "intensity_pct": 12.46
+        },
+        {
+          "date": "2026-07-21",
+          "netflow_100m": -18.978,
+          "intensity_pct": -6.06
+        },
+        {
+          "date": "2026-07-22",
+          "netflow_100m": -3.101,
+          "intensity_pct": -0.82
+        },
+        {
+          "date": "2026-07-23",
+          "netflow_100m": -19.708,
+          "intensity_pct": -3.57
+        },
+        {
+          "date": "2026-07-24",
+          "netflow_100m": -69.482,
+          "intensity_pct": -10.33
+        },
+        {
+          "date": "2026-07-27",
+          "netflow_100m": 18.947,
+          "intensity_pct": 2.74
+        },
+        {
+          "date": "2026-07-28",
+          "netflow_100m": 9.631,
+          "intensity_pct": 1.81
+        },
+        {
+          "date": "2026-07-29",
+          "netflow_100m": 10.15,
+          "intensity_pct": 1.93
+        },
+        {
+          "date": "2026-07-30",
+          "netflow_100m": 3.621,
+          "intensity_pct": 0.75
+        },
+        {
+          "date": "2026-07-31",
+          "netflow_100m": -21.59,
+          "intensity_pct": -6.69
+        },
+        {
+          "date": "2026-08-03",
+          "netflow_100m": -1.076,
+          "intensity_pct": -0.31
+        },
+        {
+          "date": "2026-08-04",
+          "netflow_100m": 13.942,
+          "intensity_pct": 3.57
+        },
+        {
+          "date": "2026-08-05",
+          "netflow_100m": -28.881,
+          "intensity_pct": -4.99
+        },
+        {
+          "date": "2026-08-06",
+          "netflow_100m": 17.389,
+          "intensity_pct": 2.04
+        }
+      ]
+    },
+    {
+      "name": "記憶體存儲",
+      "netflow_100m": 112.492,
+      "netflow_foreign_100m": 92.141,
+      "netflow_trust_100m": 4.974,
+      "turnover_100m": 1553.485,
+      "intensity_pct": 7.24,
+      "zscore": 1.47,
+      "below_floor": false,
+      "members": [
+        {
+          "name": "南亞科",
+          "code": "2408",
+          "netflow_100m": 42.307,
+          "turnover_100m": 482.798
+        },
+        {
+          "name": "力積電",
+          "code": "6770",
+          "netflow_100m": 27.838,
+          "turnover_100m": 295.304
+        },
+        {
+          "name": "旺宏",
+          "code": "2337",
+          "netflow_100m": 24.596,
+          "turnover_100m": 152.274
+        },
+        {
+          "name": "威剛",
+          "code": "3260",
+          "netflow_100m": 23.236,
+          "turnover_100m": 89.769
+        },
+        {
+          "name": "群聯",
+          "code": "8299",
+          "netflow_100m": 15.143,
+          "turnover_100m": 110.192
+        },
+        {
+          "name": "宇瞻",
+          "code": "8271",
+          "netflow_100m": 7.406,
+          "turnover_100m": 41.772
+        },
+        {
+          "name": "至上",
+          "code": "8112",
+          "netflow_100m": 3.519,
+          "turnover_100m": 12.226
+        },
+        {
+          "name": "宜鼎",
+          "code": "5289",
+          "netflow_100m": -2.583,
+          "turnover_100m": 57.083
+        },
+        {
+          "name": "華邦電",
+          "code": "2344",
+          "netflow_100m": -28.97,
+          "turnover_100m": 312.068
+        }
+      ],
+      "history": [
+        {
+          "date": "2026-07-09",
+          "netflow_100m": 79.332,
+          "intensity_pct": 7.71
+        },
+        {
+          "date": "2026-07-13",
+          "netflow_100m": -164.095,
+          "intensity_pct": -14.44
+        },
+        {
+          "date": "2026-07-14",
+          "netflow_100m": -7.158,
+          "intensity_pct": -0.6
+        },
+        {
+          "date": "2026-07-15",
+          "netflow_100m": 151.841,
+          "intensity_pct": 10.66
+        },
+        {
+          "date": "2026-07-16",
+          "netflow_100m": -148.58,
+          "intensity_pct": -11.7
+        },
+        {
+          "date": "2026-07-17",
+          "netflow_100m": -157.065,
+          "intensity_pct": -15.22
+        },
+        {
+          "date": "2026-07-20",
+          "netflow_100m": -27.923,
+          "intensity_pct": -3.43
+        },
+        {
+          "date": "2026-07-21",
+          "netflow_100m": -23.565,
+          "intensity_pct": -3.44
+        },
+        {
+          "date": "2026-07-22",
+          "netflow_100m": 52.951,
+          "intensity_pct": 6.54
+        },
+        {
+          "date": "2026-07-23",
+          "netflow_100m": 15.882,
+          "intensity_pct": 1.7
+        },
+        {
+          "date": "2026-07-24",
+          "netflow_100m": -150.563,
+          "intensity_pct": -16.31
+        },
+        {
+          "date": "2026-07-27",
+          "netflow_100m": -21.086,
+          "intensity_pct": -2.73
+        },
+        {
+          "date": "2026-07-28",
+          "netflow_100m": -97.454,
+          "intensity_pct": -16.15
+        },
+        {
+          "date": "2026-07-29",
+          "netflow_100m": -52.861,
+          "intensity_pct": -6.45
+        },
+        {
+          "date": "2026-07-30",
+          "netflow_100m": 22.858,
+          "intensity_pct": 1.97
+        },
+        {
+          "date": "2026-07-31",
+          "netflow_100m": -13.946,
+          "intensity_pct": -5.75
+        },
+        {
+          "date": "2026-08-03",
+          "netflow_100m": 80.854,
+          "intensity_pct": 10.9
+        },
+        {
+          "date": "2026-08-04",
+          "netflow_100m": 118.087,
+          "intensity_pct": 10.37
+        },
+        {
+          "date": "2026-08-05",
+          "netflow_100m": 14.104,
+          "intensity_pct": 0.87
+        },
+        {
+          "date": "2026-08-06",
+          "netflow_100m": 112.492,
+          "intensity_pct": 7.24
+        }
+      ]
+    },
+    {
+      "name": "AI相關",
+      "netflow_100m": 143.131,
+      "netflow_foreign_100m": 75.174,
+      "netflow_trust_100m": 65.006,
+      "turnover_100m": 1878.73,
+      "intensity_pct": 7.62,
+      "zscore": 1.19,
+      "below_floor": false,
+      "members": [
+        {
+          "name": "奇鋐",
+          "code": "3017",
+          "netflow_100m": 94.305,
+          "turnover_100m": 272.196
+        },
+        {
+          "name": "鴻海",
+          "code": "2317",
+          "netflow_100m": 57.818,
+          "turnover_100m": 215.706
+        },
+        {
+          "name": "緯穎",
+          "code": "6669",
+          "netflow_100m": 13.605,
+          "turnover_100m": 83.116
+        },
+        {
+          "name": "智邦",
+          "code": "2345",
+          "netflow_100m": 12.259,
+          "turnover_100m": 99.939
+        },
+        {
+          "name": "台達電",
+          "code": "2308",
+          "netflow_100m": 9.921,
+          "turnover_100m": 182.009
+        },
+        {
+          "name": "貿聯-KY",
+          "code": "3665",
+          "netflow_100m": 8.941,
+          "turnover_100m": 121.152
+        },
+        {
+          "name": "信驊",
+          "code": "5274",
+          "netflow_100m": 7.893,
+          "turnover_100m": 61.115
+        },
+        {
+          "name": "世芯-KY",
+          "code": "3661",
+          "netflow_100m": 5.698,
+          "turnover_100m": 65.391
+        },
+        {
+          "name": "富世達",
+          "code": "6805",
+          "netflow_100m": 3.187,
+          "turnover_100m": 54.477
+        },
+        {
+          "name": "勤誠",
+          "code": "8210",
+          "netflow_100m": 2.305,
+          "turnover_100m": 24.706
+        },
+        {
+          "name": "創意",
+          "code": "3443",
+          "netflow_100m": 1.175,
+          "turnover_100m": 82.407
+        },
+        {
+          "name": "健策",
+          "code": "3653",
+          "netflow_100m": -2.51,
+          "turnover_100m": 94.974
+        },
+        {
+          "name": "廣達",
+          "code": "2382",
+          "netflow_100m": -5.421,
+          "turnover_100m": 41.571
+        },
+        {
+          "name": "金像電",
+          "code": "2368",
+          "netflow_100m": -9.199,
+          "turnover_100m": 125.872
+        },
+        {
+          "name": "川湖",
+          "code": "2059",
+          "netflow_100m": -10.267,
+          "turnover_100m": 68.916
+        },
+        {
+          "name": "聯發科",
+          "code": "2454",
+          "netflow_100m": -46.578,
+          "turnover_100m": 285.184
+        }
+      ],
+      "history": [
+        {
+          "date": "2026-07-09",
+          "netflow_100m": -58.77,
+          "intensity_pct": -4.55
+        },
+        {
+          "date": "2026-07-13",
+          "netflow_100m": -31.856,
+          "intensity_pct": -2.82
+        },
+        {
+          "date": "2026-07-14",
+          "netflow_100m": -59.079,
+          "intensity_pct": -3.73
+        },
+        {
+          "date": "2026-07-15",
+          "netflow_100m": -20.721,
+          "intensity_pct": -1.72
+        },
+        {
+          "date": "2026-07-16",
+          "netflow_100m": -27.299,
+          "intensity_pct": -2.51
+        },
+        {
+          "date": "2026-07-17",
+          "netflow_100m": -119.529,
+          "intensity_pct": -7.27
+        },
+        {
+          "date": "2026-07-20",
+          "netflow_100m": 90.613,
+          "intensity_pct": 6.36
+        },
+        {
+          "date": "2026-07-21",
+          "netflow_100m": 86.701,
+          "intensity_pct": 6.61
+        },
+        {
+          "date": "2026-07-22",
+          "netflow_100m": 36.888,
+          "intensity_pct": 1.91
+        },
+        {
+          "date": "2026-07-23",
+          "netflow_100m": 198.618,
+          "intensity_pct": 12.84
+        },
+        {
+          "date": "2026-07-24",
+          "netflow_100m": -43.099,
+          "intensity_pct": -3.16
+        },
+        {
+          "date": "2026-07-27",
+          "netflow_100m": -23.622,
+          "intensity_pct": -2.06
+        },
+        {
+          "date": "2026-07-28",
+          "netflow_100m": -195.932,
+          "intensity_pct": -12.69
+        },
+        {
+          "date": "2026-07-29",
+          "netflow_100m": 38.133,
+          "intensity_pct": 1.88
+        },
+        {
+          "date": "2026-07-30",
+          "netflow_100m": -256.335,
+          "intensity_pct": -13.09
+        },
+        {
+          "date": "2026-07-31",
+          "netflow_100m": 51.823,
+          "intensity_pct": 3.47
+        },
+        {
+          "date": "2026-08-03",
+          "netflow_100m": 102.047,
+          "intensity_pct": 6.16
+        },
+        {
+          "date": "2026-08-04",
+          "netflow_100m": 151.861,
+          "intensity_pct": 6.61
+        },
+        {
+          "date": "2026-08-05",
+          "netflow_100m": 215.797,
+          "intensity_pct": 10.2
+        },
+        {
+          "date": "2026-08-06",
+          "netflow_100m": 143.131,
+          "intensity_pct": 7.62
+        }
+      ]
+    },
+    {
+      "name": "PCB上游",
+      "netflow_100m": -25.638,
+      "netflow_foreign_100m": -47.74,
+      "netflow_trust_100m": 23.953,
+      "turnover_100m": 585.309,
+      "intensity_pct": -4.38,
+      "zscore": -0.25,
+      "below_floor": false,
+      "members": [
+        {
+          "name": "南亞",
+          "code": "1303",
+          "netflow_100m": 4.197,
+          "turnover_100m": 102.165
+        },
+        {
+          "name": "台光電",
+          "code": "2383",
+          "netflow_100m": 3.023,
+          "turnover_100m": 98.424
+        },
+        {
+          "name": "台玻",
+          "code": "1802",
+          "netflow_100m": 0.146,
+          "turnover_100m": 17.381
+        },
+        {
+          "name": "德宏",
+          "code": "5475",
+          "netflow_100m": -0.516,
+          "turnover_100m": 6.8
+        },
+        {
+          "name": "建榮",
+          "code": "5340",
+          "netflow_100m": -1.132,
+          "turnover_100m": 3.479
+        },
+        {
+          "name": "富喬",
+          "code": "1815",
+          "netflow_100m": -1.477,
+          "turnover_100m": 35.539
+        },
+        {
+          "name": "金居",
+          "code": "8358",
+          "netflow_100m": -10.554,
+          "turnover_100m": 75.831
+        },
+        {
+          "name": "台燿",
+          "code": "6274",
+          "netflow_100m": -19.326,
+          "turnover_100m": 245.689
+        }
+      ],
+      "history": [
+        {
+          "date": "2026-07-09",
+          "netflow_100m": -33.216,
+          "intensity_pct": -6.66
+        },
+        {
+          "date": "2026-07-13",
+          "netflow_100m": 8.243,
+          "intensity_pct": 1.83
+        },
+        {
+          "date": "2026-07-14",
+          "netflow_100m": -17.297,
+          "intensity_pct": -2.78
+        },
+        {
+          "date": "2026-07-15",
+          "netflow_100m": -5.806,
+          "intensity_pct": -1.02
+        },
+        {
+          "date": "2026-07-16",
+          "netflow_100m": 6.928,
+          "intensity_pct": 1.29
+        },
+        {
+          "date": "2026-07-17",
+          "netflow_100m": 35.847,
+          "intensity_pct": 6.78
+        },
+        {
+          "date": "2026-07-20",
+          "netflow_100m": 43.437,
+          "intensity_pct": 8.3
+        },
+        {
+          "date": "2026-07-21",
+          "netflow_100m": -67.201,
+          "intensity_pct": -14.44
+        },
+        {
+          "date": "2026-07-22",
+          "netflow_100m": -14.562,
+          "intensity_pct": -3.31
+        },
+        {
+          "date": "2026-07-23",
+          "netflow_100m": -43.777,
+          "intensity_pct": -8.61
+        },
+        {
+          "date": "2026-07-24",
+          "netflow_100m": -2.967,
+          "intensity_pct": -0.82
+        },
+        {
+          "date": "2026-07-27",
+          "netflow_100m": 17.929,
+          "intensity_pct": 5.81
+        },
+        {
+          "date": "2026-07-28",
+          "netflow_100m": 9.091,
+          "intensity_pct": 3.03
+        },
+        {
+          "date": "2026-07-29",
+          "netflow_100m": 16.321,
+          "intensity_pct": 3.7
+        },
+        {
+          "date": "2026-07-30",
+          "netflow_100m": -68.784,
+          "intensity_pct": -10.17
+        },
+        {
+          "date": "2026-07-31",
+          "netflow_100m": -32.567,
+          "intensity_pct": -25.06
+        },
+        {
+          "date": "2026-08-03",
+          "netflow_100m": -112.666,
+          "intensity_pct": -21.35
+        },
+        {
+          "date": "2026-08-04",
+          "netflow_100m": -23.92,
+          "intensity_pct": -4.39
+        },
+        {
+          "date": "2026-08-05",
+          "netflow_100m": -49.918,
+          "intensity_pct": -10.23
+        },
+        {
+          "date": "2026-08-06",
+          "netflow_100m": -25.638,
+          "intensity_pct": -4.38
+        }
+      ]
+    },
+    {
+      "name": "探針卡",
+      "netflow_100m": -4.613,
+      "netflow_foreign_100m": -3.431,
+      "netflow_trust_100m": -1.096,
+      "turnover_100m": 100.639,
+      "intensity_pct": -4.58,
+      "zscore": -0.25,
+      "below_floor": false,
+      "members": [
+        {
+          "name": "精測",
+          "code": "6510",
+          "netflow_100m": 1.126,
+          "turnover_100m": 12.928
+        },
+        {
+          "name": "中探針",
+          "code": "6217",
+          "netflow_100m": -0.007,
+          "turnover_100m": 1.549
+        },
+        {
+          "name": "穎崴",
+          "code": "6515",
+          "netflow_100m": -0.361,
+          "turnover_100m": 32.015
+        },
+        {
+          "name": "雍智科技",
+          "code": "6683",
+          "netflow_100m": -2.298,
+          "turnover_100m": 13.533
+        },
+        {
+          "name": "旺矽",
+          "code": "6223",
+          "netflow_100m": -3.073,
+          "turnover_100m": 40.614
+        }
+      ],
+      "history": [
+        {
+          "date": "2026-07-09",
+          "netflow_100m": 12.679,
+          "intensity_pct": 12.75
+        },
+        {
+          "date": "2026-07-13",
+          "netflow_100m": -16.011,
+          "intensity_pct": -17.23
+        },
+        {
+          "date": "2026-07-14",
+          "netflow_100m": 0.676,
+          "intensity_pct": 0.56
+        },
+        {
+          "date": "2026-07-15",
+          "netflow_100m": -5.203,
+          "intensity_pct": -5.71
+        },
+        {
+          "date": "2026-07-16",
+          "netflow_100m": -4.673,
+          "intensity_pct": -4.43
+        },
+        {
+          "date": "2026-07-17",
+          "netflow_100m": 17.86,
+          "intensity_pct": 13.02
+        },
+        {
+          "date": "2026-07-20",
+          "netflow_100m": 8.481,
+          "intensity_pct": 7.85
+        },
+        {
+          "date": "2026-07-21",
+          "netflow_100m": -16.764,
+          "intensity_pct": -9.83
+        },
+        {
+          "date": "2026-07-22",
+          "netflow_100m": -14.298,
+          "intensity_pct": -11.18
+        },
+        {
+          "date": "2026-07-23",
+          "netflow_100m": -0.232,
+          "intensity_pct": -0.37
+        },
+        {
+          "date": "2026-07-24",
+          "netflow_100m": -0.478,
+          "intensity_pct": -0.64
+        },
+        {
+          "date": "2026-07-27",
+          "netflow_100m": -1.135,
+          "intensity_pct": -2.06
+        },
+        {
+          "date": "2026-07-28",
+          "netflow_100m": 0.229,
+          "intensity_pct": 0.35
+        },
+        {
+          "date": "2026-07-29",
+          "netflow_100m": 8.901,
+          "intensity_pct": 8.49
+        },
+        {
+          "date": "2026-07-30",
+          "netflow_100m": -9.813,
+          "intensity_pct": -9.45
+        },
+        {
+          "date": "2026-07-31",
+          "netflow_100m": -3.915,
+          "intensity_pct": -8.85
+        },
+        {
+          "date": "2026-08-03",
+          "netflow_100m": -4.966,
+          "intensity_pct": -6.52
+        },
+        {
+          "date": "2026-08-04",
+          "netflow_100m": -8.249,
+          "intensity_pct": -8.49
+        },
+        {
+          "date": "2026-08-05",
+          "netflow_100m": -10.015,
+          "intensity_pct": -10.19
+        },
+        {
+          "date": "2026-08-06",
+          "netflow_100m": -4.613,
+          "intensity_pct": -4.58
+        }
+      ]
+    },
+    {
+      "name": "特用化學",
+      "netflow_100m": 1.046,
+      "netflow_foreign_100m": 1.072,
+      "netflow_trust_100m": -0.328,
+      "turnover_100m": 24.19,
+      "intensity_pct": 4.32,
+      "zscore": 0.48,
+      "below_floor": false,
+      "members": [
+        {
+          "name": "新應材",
+          "code": "4749",
+          "netflow_100m": 1.507,
+          "turnover_100m": 7.916
+        },
+        {
+          "name": "台特化",
+          "code": "4772",
+          "netflow_100m": 0.19,
+          "turnover_100m": 1.172
+        },
+        {
+          "name": "中華化",
+          "code": "1727",
+          "netflow_100m": 0.14,
+          "turnover_100m": 0.8
+        },
+        {
+          "name": "長興",
+          "code": "1717",
+          "netflow_100m": 0.023,
+          "turnover_100m": 4.972
+        },
+        {
+          "name": "達興材料",
+          "code": "5234",
+          "netflow_100m": 0.014,
+          "turnover_100m": 0.855
+        },
+        {
+          "name": "三福化",
+          "code": "4755",
+          "netflow_100m": -0.013,
+          "turnover_100m": 0.109
+        },
+        {
+          "name": "國精化",
+          "code": "4722",
+          "netflow_100m": -0.05,
+          "turnover_100m": 3.152
+        },
+        {
+          "name": "上品",
+          "code": "4770",
+          "netflow_100m": -0.134,
+          "turnover_100m": 0.377
+        },
+        {
+          "name": "雙鍵",
+          "code": "4764",
+          "netflow_100m": -0.632,
+          "turnover_100m": 4.838
+        }
+      ],
+      "history": [
+        {
+          "date": "2026-07-09",
+          "netflow_100m": -8.023,
+          "intensity_pct": -19.51
+        },
+        {
+          "date": "2026-07-13",
+          "netflow_100m": -6.053,
+          "intensity_pct": -16.74
+        },
+        {
+          "date": "2026-07-14",
+          "netflow_100m": 1.919,
+          "intensity_pct": 3.1
+        },
+        {
+          "date": "2026-07-15",
+          "netflow_100m": 0.533,
+          "intensity_pct": 1.06
+        },
+        {
+          "date": "2026-07-16",
+          "netflow_100m": -2.226,
+          "intensity_pct": -4.97
+        },
+        {
+          "date": "2026-07-17",
+          "netflow_100m": -9.136,
+          "intensity_pct": -21.32
+        },
+        {
+          "date": "2026-07-20",
+          "netflow_100m": 4.959,
+          "intensity_pct": 13.45
+        },
+        {
+          "date": "2026-07-21",
+          "netflow_100m": -0.379,
+          "intensity_pct": -1.76
+        },
+        {
+          "date": "2026-07-22",
+          "netflow_100m": -1.494,
+          "intensity_pct": -5.94
+        },
+        {
+          "date": "2026-07-23",
+          "netflow_100m": 2.51,
+          "intensity_pct": 10.69
+        },
+        {
+          "date": "2026-07-24",
+          "netflow_100m": -1.343,
+          "intensity_pct": -4.49
+        },
+        {
+          "date": "2026-07-27",
+          "netflow_100m": 0.956,
+          "intensity_pct": 4.19
+        },
+        {
+          "date": "2026-07-28",
+          "netflow_100m": 0.392,
+          "intensity_pct": 0.98
+        },
+        {
+          "date": "2026-07-29",
+          "netflow_100m": 4.049,
+          "intensity_pct": 8.64
+        },
+        {
+          "date": "2026-07-30",
+          "netflow_100m": 2.792,
+          "intensity_pct": 7.72
+        },
+        {
+          "date": "2026-07-31",
+          "netflow_100m": -2.359,
+          "intensity_pct": -10.42
+        },
+        {
+          "date": "2026-08-03",
+          "netflow_100m": 0.457,
+          "intensity_pct": 1.91
+        },
+        {
+          "date": "2026-08-04",
+          "netflow_100m": -0.914,
+          "intensity_pct": -4.35
+        },
+        {
+          "date": "2026-08-05",
+          "netflow_100m": 3.072,
+          "intensity_pct": 10.06
+        },
+        {
+          "date": "2026-08-06",
+          "netflow_100m": 1.046,
+          "intensity_pct": 4.32
+        }
+      ]
+    },
+    {
+      "name": "半導體廠務",
+      "netflow_100m": 10.441,
+      "netflow_foreign_100m": 10.812,
+      "netflow_trust_100m": -1.565,
+      "turnover_100m": 80.489,
+      "intensity_pct": 12.97,
+      "zscore": 1.46,
+      "below_floor": false,
+      "members": [
+        {
+          "name": "漢唐",
+          "code": "2404",
+          "netflow_100m": 5.998,
+          "turnover_100m": 20.174
+        },
+        {
+          "name": "亞翔",
+          "code": "6139",
+          "netflow_100m": 3.472,
+          "turnover_100m": 34.096
+        },
+        {
+          "name": "洋基工程",
+          "code": "6691",
+          "netflow_100m": 0.895,
+          "turnover_100m": 7.781
+        },
+        {
+          "name": "帆宣",
+          "code": "6196",
+          "netflow_100m": 0.315,
+          "turnover_100m": 8.995
+        },
+        {
+          "name": "巨漢",
+          "code": "6903",
+          "netflow_100m": 0.202,
+          "turnover_100m": 0.99
+        },
+        {
+          "name": "銳澤",
+          "code": "7703",
+          "netflow_100m": 0.046,
+          "turnover_100m": 0.196
+        },
+        {
+          "name": "聖暉",
+          "code": "5536",
+          "netflow_100m": -0.159,
+          "turnover_100m": 5.637
+        },
+        {
+          "name": "兆聯實業",
+          "code": "6944",
+          "netflow_100m": -0.329,
+          "turnover_100m": 2.619
+        }
+      ],
+      "history": [
+        {
+          "date": "2026-07-09",
+          "netflow_100m": -3.97,
+          "intensity_pct": -4.43
+        },
+        {
+          "date": "2026-07-13",
+          "netflow_100m": 6.26,
+          "intensity_pct": 7.57
+        },
+        {
+          "date": "2026-07-14",
+          "netflow_100m": -10.591,
+          "intensity_pct": -10.06
+        },
+        {
+          "date": "2026-07-15",
+          "netflow_100m": 20.296,
+          "intensity_pct": 16.21
+        },
+        {
+          "date": "2026-07-16",
+          "netflow_100m": -8.541,
+          "intensity_pct": -7.62
+        },
+        {
+          "date": "2026-07-17",
+          "netflow_100m": -17.005,
+          "intensity_pct": -13.97
+        },
+        {
+          "date": "2026-07-20",
+          "netflow_100m": -2.926,
+          "intensity_pct": -3.27
+        },
+        {
+          "date": "2026-07-21",
+          "netflow_100m": -4.214,
+          "intensity_pct": -5.81
+        },
+        {
+          "date": "2026-07-22",
+          "netflow_100m": 5.434,
+          "intensity_pct": 6.78
+        },
+        {
+          "date": "2026-07-23",
+          "netflow_100m": -4.212,
+          "intensity_pct": -6.82
+        },
+        {
+          "date": "2026-07-24",
+          "netflow_100m": -18.78,
+          "intensity_pct": -13.03
+        },
+        {
+          "date": "2026-07-27",
+          "netflow_100m": -26.026,
+          "intensity_pct": -21.23
+        },
+        {
+          "date": "2026-07-28",
+          "netflow_100m": -12.448,
+          "intensity_pct": -12.64
+        },
+        {
+          "date": "2026-07-29",
+          "netflow_100m": 3.252,
+          "intensity_pct": 2.45
+        },
+        {
+          "date": "2026-07-30",
+          "netflow_100m": -11.186,
+          "intensity_pct": -13.56
+        },
+        {
+          "date": "2026-07-31",
+          "netflow_100m": -22.533,
+          "intensity_pct": -22.16
+        },
+        {
+          "date": "2026-08-03",
+          "netflow_100m": 7.349,
+          "intensity_pct": 7.35
+        },
+        {
+          "date": "2026-08-04",
+          "netflow_100m": -1.628,
+          "intensity_pct": -2.08
+        },
+        {
+          "date": "2026-08-05",
+          "netflow_100m": 1.413,
+          "intensity_pct": 1.76
+        },
+        {
+          "date": "2026-08-06",
+          "netflow_100m": 10.441,
+          "intensity_pct": 12.97
+        }
+      ]
+    }
+  ]
+}
