@@ -14,36 +14,25 @@
   .wrap{max-width:760px;margin:0 auto;}
   .head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;
     border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:6px;}
-  h1{font-size:22px;font-weight:800;letter-spacing:.3px;}
-  h1 .a{color:var(--amber);}
-  .back{font-size:13px;color:var(--amber);text-decoration:none;border:1px solid var(--line);
-    padding:6px 12px;border-radius:8px;}
-  .back:hover{border-color:var(--amber);}
-  h2{font-size:16px;font-weight:700;margin:26px 0 8px;color:var(--ink);
-    border-left:3px solid var(--amber);padding-left:10px;}
-  p{color:var(--ink-dim);font-size:14px;margin:6px 0;}
-  b{color:var(--ink);}
+  h1{font-size:22px;font-weight:800;} h1 .a{color:var(--amber);}
+  .back{font-size:13px;color:var(--amber);text-decoration:none;border:1px solid var(--line);padding:6px 12px;border-radius:8px;}
+  h2{font-size:16px;font-weight:700;margin:26px 0 8px;border-left:3px solid var(--amber);padding-left:10px;}
+  p{color:var(--ink-dim);font-size:14px;margin:6px 0;} b{color:var(--ink);}
   .red{color:var(--red);} .green{color:var(--green);} .amber{color:var(--amber);}
   ul{margin:6px 0 6px 4px;list-style:none;}
   li{color:var(--ink-dim);font-size:14px;margin:7px 0;padding-left:20px;position:relative;}
   li::before{content:"›";position:absolute;left:4px;color:var(--amber);font-weight:700;}
-  .card{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line);
-    border-radius:12px;padding:14px 16px;margin:10px 0;}
+  .card{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:10px 0;}
   .quad{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0;}
   .q{border:1px solid var(--line-soft);border-radius:9px;padding:10px 12px;font-size:13px;}
-  .q .t{font-weight:700;font-size:13.5px;margin-bottom:2px;}
-  .q .d{color:var(--ink-faint);font-size:12px;}
+  .q .t{font-weight:700;font-size:13.5px;margin-bottom:2px;} .q .d{color:var(--ink-faint);font-size:12px;}
   .dot{display:inline-block;width:10px;height:10px;border-radius:50%;vertical-align:middle;margin-right:5px;}
-  .kv{display:grid;grid-template-columns:96px 1fr;gap:6px 10px;font-size:13.5px;margin:8px 0;}
-  .kv .k{color:var(--amber);font-weight:600;}
-  .kv .v{color:var(--ink-dim);}
-  .warn{background:rgba(244,181,63,.1);border:1px solid #4a3a18;border-radius:10px;padding:12px 14px;
-    font-size:13px;color:var(--ink-dim);margin:12px 0;}
+  .kv{display:grid;grid-template-columns:100px 1fr;gap:6px 10px;font-size:13.5px;margin:8px 0;}
+  .kv .k{color:var(--amber);font-weight:600;} .kv .v{color:var(--ink-dim);}
+  .warn{background:rgba(244,181,63,.1);border:1px solid #4a3a18;border-radius:10px;padding:12px 14px;font-size:13px;color:var(--ink-dim);margin:12px 0;}
   .warn b{color:var(--amber);}
-  code{background:var(--panel2);padding:1px 7px;border-radius:5px;color:var(--amber);
-    font-family:"JetBrains Mono",monospace;font-size:12.5px;word-break:break-all;}
-  .foot{color:var(--ink-faint);font-size:11.5px;text-align:center;margin-top:26px;
-    border-top:1px solid var(--line-soft);padding-top:14px;line-height:1.6;}
+  .foot{color:var(--ink-faint);font-size:11.5px;text-align:center;margin-top:26px;border-top:1px solid var(--line-soft);padding-top:14px;line-height:1.6;}
+  .foot a{color:var(--amber);text-decoration:none;}
 </style>
 </head>
 <body>
@@ -54,76 +43,87 @@
   </div>
 
   <h2>這是什麼?</h2>
-  <p>這是一張<b>台股「板塊資金」看盤圖</b>。它把股票分成一個個「板塊」(產業主題,例如記憶體、探針卡、AI…),幫你一眼看出<b class="red">盤後三大法人(外資、投信、自營)的錢,今天流進了哪些板塊、流出了哪些</b>。資料每個交易日收盤後由雲端自動更新,你只要打開就看得到最新的。</p>
+  <p>這是一張<b>台股「板塊資金」看盤圖</b>。它把股票分成一個個「板塊」(產業主題,例如記憶體、探針卡、AI…),幫你一眼看出<b class="red">盤後法人的錢,近期流進了哪些板塊、流出了哪些</b>,還能鑽進去看每檔股票被哪個法人買賣了多少。資料每個交易日收盤後由雲端自動更新。</p>
 
   <h2>怎麼打開?</h2>
   <ul>
-    <li><b>電腦或手機瀏覽器</b>:直接打開儀表板網址即可,不用安裝任何東西。</li>
-    <li><b>手機更方便</b>:打開網址後,用瀏覽器選單選「加入主畫面」,之後就像一個 App,點一下就看盤。</li>
-    <li>右上角會顯示<b>資料日期</b>和<b>板塊數量</b>——看到日期就代表讀到的是最新真實資料。</li>
+    <li><b>電腦或手機瀏覽器</b>:直接打開儀表板網址即可,免安裝。</li>
+    <li><b>手機更方便</b>:打開後用瀏覽器選單「加入主畫面」,之後像 App 一樣點一下就看盤。</li>
+    <li>右上角顯示<b>資料日期</b>與<b>板塊數量</b>,看到日期就代表讀到最新真實資料。</li>
   </ul>
 
-  <h2>泡泡圖怎麼看?(最重要)</h2>
-  <p>圖上<b>每一顆泡泡就是一個板塊</b>。它身上帶了四個資訊:</p>
+  <h2>兩排快捷鍵(先選這個)</h2>
+  <p>主畫面上方有兩排快捷鍵,<b>切換後全圖、表格、明細都會用真實資料重算</b>:</p>
   <div class="card">
     <div class="kv">
-      <div class="k">左右位置</div><div class="v">越<b>右</b>=資金<b class="red">挹注強度</b>越強(這板塊被推得越用力);越左=流出。</div>
-      <div class="k">上下位置</div><div class="v">越<b>上</b>=對「這個板塊自己」來說<b>越異常熱</b>(今天比它平常明顯大);越下=偏冷。</div>
-      <div class="k">泡泡大小</div><div class="v">代表這板塊的<b>成交值(胃納量)</b>——泡泡越大,板塊規模越大。</div>
-      <div class="k">泡泡顏色</div><div class="v"><span class="dot" style="background:var(--red)"></span><b class="red">紅=資金淨流入</b>　<span class="dot" style="background:var(--green)"></span><b class="green">綠=資金淨流出</b>(台股習慣:紅漲綠跌)。</div>
-      <div class="k">外圈光暈</div><div class="v"><b class="amber">板塊「內部分歧」</b>:光暈<b>小而實</b>=成分股同方向(乾淨、可信);光暈<b>大而糊</b>=一半流入一半流出(內部在輪動,位置別盡信,要點進去看)。</div>
+      <div class="k">法人別</div><div class="v"><b>三大合計 / 外資 / 投信 / 自營</b>——想看哪個法人的資金就點哪個。</div>
+      <div class="k">統計期間</div><div class="v"><b>近1 / 5 / 10 / 20日</b>(交易日,不含休市)。板塊值就是成分股在這期間的真實加總。</div>
     </div>
   </div>
-  <p>圖被中間十字分成四區,記住四個角落就會看了:</p>
-  <div class="quad">
-    <div class="q" style="border-color:#5a2530"><div class="t red">右上 · 流入且異常熱</div><div class="d">錢正在進、而且對它自己算爆量 → 最值得注意的資金亮點。</div></div>
-    <div class="q"><div class="t amber">左上 · 流出但轉溫</div><div class="d">還在流出,但比平常沒那麼冷,可能剛要轉向。</div></div>
-    <div class="q" style="border-color:#1f5a44"><div class="t green">左下 · 流出且偏冷</div><div class="d">錢在退、又比平常還冷 → 最弱、資金離場。</div></div>
-    <div class="q"><div class="t">右下 · 流入但偏冷</div><div class="d">有進錢,但比它平常小,力道普通。</div></div>
-  </div>
-  <p>簡單記:<b class="red">越往右上=資金越熱越強</b>,<b class="green">越往左下=越弱越冷</b>。</p>
+  <p>例如選「<b>投信 + 近5日</b>」,看到的就是投信最近 5 個交易日累積的板塊與個股資金。</p>
 
-  <h2>下面的「資金流向表」怎麼看?</h2>
+  <h2>泡泡圖怎麼看?(最重要)</h2>
+  <p>每一顆泡泡是一個板塊,身上帶五個資訊(會依你選的法人+期間變):</p>
+  <div class="card">
+    <div class="kv">
+      <div class="k">左右位置</div><div class="v">越<b>右</b>=<b class="red">挹注強度</b>越強(被推得越用力);越左=流出。</div>
+      <div class="k">上下位置</div><div class="v">越<b>上</b>=對這板塊自己來說<b>越異常熱</b>(這期間比它平常明顯大)。</div>
+      <div class="k">泡泡大小</div><div class="v">所選期間的<b>累積成交值(胃納量)</b>,越大規模越大。</div>
+      <div class="k">泡泡顏色</div><div class="v"><span class="dot" style="background:var(--red)"></span><b class="red">紅=淨流入</b>　<span class="dot" style="background:var(--green)"></span><b class="green">綠=淨流出</b>(台股:紅漲綠跌)。</div>
+      <div class="k">外圈光暈</div><div class="v"><b class="amber">板塊內部分歧</b>:小而實=成分股同方向(乾淨);大而糊=一半流入一半流出(內部輪動,點進去看)。</div>
+    </div>
+  </div>
+  <div class="quad">
+    <div class="q" style="border-color:#5a2530"><div class="t red">右上 · 流入且異常熱</div><div class="d">錢在進、又對自己算爆量 → 最值得注意。</div></div>
+    <div class="q"><div class="t amber">左上 · 流出但轉溫</div><div class="d">還在流出但比平常沒那麼冷,可能剛轉向。</div></div>
+    <div class="q" style="border-color:#1f5a44"><div class="t green">左下 · 流出且偏冷</div><div class="d">錢在退又更冷 → 最弱。</div></div>
+    <div class="q"><div class="t">右下 · 流入但偏冷</div><div class="d">有進錢但比平常小,力道普通。</div></div>
+  </div>
+  <p>簡單記:<b class="red">越往右上=越熱越強</b>,<b class="green">越往左下=越弱越冷</b>。</p>
+
+  <h2>資金流向表</h2>
   <ul>
-    <li>列出所有板塊的三個數字:<b>淨流入(億)</b>=進了多少錢、<b>強度%</b>=被推得多用力、<b>z</b>=對自己算不算異常。</li>
-    <li><b>點欄位標題可以排序</b>。用不同數字排,名次會不一樣——這是正常的,因為它們回答不同問題:「錢最多」不等於「被推最兇」。</li>
-    <li>板塊名稱前有 <b class="amber">⚑</b> 記號,代表這是<b>成交值很小的板塊</b>,它的強度/z 容易被誇大,看的時候當參考就好。</li>
+    <li>顯示各板塊在「所選法人+期間」的<b>淨流入(億)、強度%、z、成交值</b>。</li>
+    <li><b>點欄位標題排序</b>。用不同數字排名次會不同(錢最多 ≠ 被推最兇),這是正常的。</li>
+    <li>名稱前 <b class="amber">⚑</b> = 小板塊,強度/z 易被誇大,當參考。</li>
   </ul>
 
-  <h2>想看某個板塊的細節?</h2>
-  <p><b>點任一顆泡泡、或表格任一列</b>,右邊會展開這個板塊的明細:</p>
+  <h2>點進板塊看「個股」明細(這是重點)</h2>
+  <p><b>點任一泡泡或表格列</b>,右邊展開該板塊在所選期間的細節:</p>
   <ul>
-    <li><b>外資 / 投信</b>各自淨流入多少(看是誰在買)。</li>
-    <li><b>成分股長條圖</b>:板塊裡每檔股票各自流入(紅)或流出(綠)多少——一眼看出是誰在領漲、誰在扯後腿。</li>
-    <li><b>內部分歧 %</b>:0%=大家同方向(乾淨),越高=越分歧(對應那顆泡泡的光暈越大)。</li>
-    <li><b>近 20 日趨勢</b>:這板塊最近的資金是連續進、還是只有今天爆一下。</li>
+    <li>上方三格:這板塊近X日的<b>外資 / 投信 / 自營</b>各自淨流入(億)。</li>
+    <li>每檔成分股一列:長條=你選的法人淨流入;右邊數字=<b>金額(億) / 買賣超張數</b>。</li>
+    <li>每列下方一排:該股近X日<b>外資、投信、自營「各自」的金額(億)/張數</b>——一眼看出是誰在買這檔。</li>
+    <li>最下方:所選法人的<b>每日淨流入趨勢</b>,看是持續進、還是單日爆量。</li>
   </ul>
 
   <h2>想看「這陣子的資金輪動」?</h2>
   <ul>
-    <li>泡泡圖下方有 <b>▶ 播放</b> 按鈕,按下去泡泡會<b>沿著近 20 日的軌跡移動</b>,看得到資金從哪個板塊輪動到哪個板塊。</li>
-    <li>可以<b>拖時間軸</b>停在任一天,調<b>速度</b>,或開<b>🔁 循環</b>一直重播。看完按<b>「回到今日」</b>回到最新畫面。</li>
+    <li>把期間切到<b>近1日</b>,泡泡圖下方會出現 <b>▶ 播放</b>,按下去泡泡會沿近20日軌跡移動,看資金在板塊間輪動。</li>
+    <li>可拖時間軸、按「回到今日」。(近5/10/20日模式不提供播放,因為那是區間累積值。)</li>
   </ul>
 
   <div class="warn">
     <b>⚠ 幾個一定要知道的重點</b><br>
-    ① 這是<b>盤後(收盤後)資料</b>,不是即時的——它告訴你「今天收盤後,法人一整天總共買賣了多少」,每個交易日更新一次。<br>
+    ① 這是<b>盤後(收盤後)資料</b>,每個交易日更新一次;5/10/20日是截至最新資料日往前累積的交易日。<br>
     ② 顏色是<b>台股習慣:紅=進場/漲、綠=出場/跌</b>(和美股相反)。<br>
-    ③ 這是<b>資料整理工具,不是投資建議</b>。它幫你看清資金流向,買賣決策請自行判斷、自負盈虧。
+    ③ 目前<b>不含</b>集中度/家數差與個股異常值(那需要另一種付費資料,之後才會加)。<br>
+    ④ 這是<b>資料整理工具,不是投資建議</b>,買賣自行判斷、自負盈虧。
   </div>
 
   <h2>名詞小辭典</h2>
-  <div class="kv" style="grid-template-columns:110px 1fr">
-    <div class="k">淨流入</div><div class="v">法人買的金額減掉賣的金額。正=進錢,負=出錢。</div>
-    <div class="k">挹注強度%</div><div class="v">淨流入佔這板塊成交值的比例,看「被推得多用力」。</div>
-    <div class="k">異常度 z</div><div class="v">今天相對這板塊自己最近的常態,算不算特別大。越高越不尋常。</div>
-    <div class="k">成交值</div><div class="v">這板塊今天總共成交多少錢,代表它的規模/胃納量。</div>
-    <div class="k">內部分歧</div><div class="v">板塊裡的股票方向一不一致。低=齊步,高=有人買有人賣。</div>
+  <div class="kv" style="grid-template-columns:112px 1fr">
+    <div class="k">淨流入</div><div class="v">所選法人近X日買進金額減賣出金額。正=進錢,負=出錢。</div>
+    <div class="k">買賣超張數</div><div class="v">近X日買進股數減賣出股數換算成張。正=買超,負=賣超。</div>
+    <div class="k">挹注強度%</div><div class="v">期間淨流入佔期間成交值的比例,看被推得多用力。</div>
+    <div class="k">異常度 z</div><div class="v">所選期間的板塊淨流入,相對該板塊同期間近期常態算不算特別大。</div>
+    <div class="k">成交值</div><div class="v">板塊在所選期間總成交金額,代表規模/胃納量。</div>
+    <div class="k">內部分歧</div><div class="v">板塊裡股票方向一不一致。低=齊步,高=有人買有人賣。</div>
   </div>
 
   <div class="foot">
     板塊資金儀表板 · 使用說明書　|　資料來源:FinMind(盤後三大法人)　|　僅供研究參考,非投資建議<br>
-    <a href="./dashboard.html" style="color:var(--amber);text-decoration:none">← 回到儀表板開始看盤</a>
+    <a href="./dashboard.html">← 回到儀表板開始看盤</a>
   </div>
 </div>
 </body>
