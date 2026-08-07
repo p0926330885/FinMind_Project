@@ -94,7 +94,7 @@
 <body>
 <div class="wrap">
   <div class="head">
-    <h1><span class="a">板塊資金</span>儀表板 <span style="font-size:12px;color:var(--ink-faint);font-weight:400">第一階段 · 法人資金</span></h1>
+    <h1><span class="a">板塊資金</span>儀表板 <span style="font-size:12px;color:var(--ink-faint);font-weight:400">第一階段 · 法人資金</span> <a href="./guide.html" style="font-size:12px;color:var(--amber);text-decoration:none;border:1px solid var(--line);padding:3px 9px;border-radius:7px;margin-left:6px;">📖 使用說明</a></h1>
     <div class="meta" id="meta">載入中…</div>
   </div>
 
@@ -106,7 +106,7 @@
 
   <div class="grid">
     <div class="card">
-      <h2><span id="bubTitle">板塊資金泡泡（三大法人）</span><span style="font-weight:400;color:var(--ink-faint)">X 強度% · Y 異常z · 大小 成交值</span></h2>
+      <h2><span id="bubTitle">板塊資金泡泡（三大法人）</span><span style="font-weight:400;color:var(--ink-faint)">X 強度% · Y 異常z · 大小 成交值 · 光暈 內部分歧</span></h2>
       <svg id="bubble" viewBox="0 0 640 440"></svg>
       <div class="player" id="player">
         <button class="pbtn" id="playBtn" aria-label="播放/暫停">
@@ -136,7 +136,8 @@
 
   <div class="note">
     強度%＝淨流入÷成交值;z＝相對自己近20日。<span class="flag">⚑</span>＝成交值低於流動性門檻的小板塊,強度/z 易失真。<br>
-    按 ▶ 可回放近20日板塊資金輪動軌跡(泡泡位置＝當日強度與異常度)。集中度/家數差的鑽取屬第二階段。
+    <b style="color:var(--amber)">光暈＝板塊內部資金分歧</b>:小而實=成分股齊步同方向(乾淨可信);大而糊=一半流入一半流出(內部輪動,點進去看是誰)。<br>
+    按 ▶ 可回放近20日板塊資金輪動軌跡。集中度/家數差(需分點資料)屬第二階段。
   </div>
 </div>
 
@@ -229,6 +230,23 @@ const nf = s => s.netflow_100m ?? 0;
 const fmt=(v,d=2,plus=true)=> (v==null?'—':(plus&&v>=0?'+':'')+Number(v).toFixed(d));
 const col = v => v>=0?'var(--red)':'var(--green)';
 
+// 資金分歧度:0(全同方向,乾淨)~0.5(完全對半,最分歧)
+function divergence(s){
+  const ms=s.members||[]; if(ms.length<2) return 0;
+  let pos=0, neg=0;
+  ms.forEach(m=>{ const v=m.netflow_100m||0; if(v>=0) pos+=v; else neg+=-v; });
+  const tot=pos+neg; if(tot<=0) return 0;
+  return Math.min(pos,neg)/tot;   // 0~0.5
+}
+// 光暈:分歧越大、圈越大越糊
+function drawHalo(g,cx,cy,r,s,c){
+  const dv=divergence(s);
+  if(dv<0.04) return;             // 幾乎同方向 → 不畫
+  const hr=r + dv*2*26;           // 最多外擴約 26px
+  el('circle',{cx,cy,r:hr,fill:c,opacity:0.05+dv*0.30},g);
+  el('circle',{cx,cy,r:hr,fill:'none',stroke:c,'stroke-width':1,'stroke-dasharray':'3 4',opacity:0.22+dv*0.6},g);
+}
+
 // ── 泡泡圖(frame=null 靜態最新;否則動畫該日) ──
 function drawBubble(){
   const svg=$('bubble'); svg.innerHTML='';
@@ -271,6 +289,7 @@ function drawBubble(){
     const g=el('g',{class:'bub'},svg);
     g.addEventListener('click',()=>select(s.name));
     const faded = sel&&sel!==s.name;
+    if(!animating && !faded) drawHalo(g,x,y,r,s,c);
     el('circle',{cx:x,cy:y,r,fill:c,opacity:faded?.22:.82,
       stroke:sel===s.name?'var(--amber)':c,'stroke-width':sel===s.name?2.5:1.5},g);
     if(!faded||sel===s.name)
@@ -319,7 +338,8 @@ function drawDetail(){
   let html=`<div class="dh">${s.below_floor?'<span class="flag">⚑</span> ':''}${s.name}</div>
     <div class="dmeta">淨流入 <b class="${nf(s)>=0?'pos':'neg'}">${fmt(s.netflow_100m)}億</b> ·
       強度 <b class="${(s.intensity_pct??0)>=0?'pos':'neg'}">${fmt(s.intensity_pct)}%</b> ·
-      z <b class="${(s.zscore??0)>=0?'pos':'neg'}">${s.zscore==null?'—':fmt(s.zscore,1)}</b></div>
+      z <b class="${(s.zscore??0)>=0?'pos':'neg'}">${s.zscore==null?'—':fmt(s.zscore,1)}</b> ·
+      內部分歧 <b style="color:${divergence(s)>=0.35?'var(--amber)':'var(--ink-dim)'}">${(divergence(s)*200).toFixed(0)}%</b></div>
     <div class="split">
       <div class="chip"><div class="k">外資淨流入</div><div class="v num ${(s.netflow_foreign_100m??0)>=0?'pos':'neg'}">${fmt(s.netflow_foreign_100m)}</div></div>
       <div class="chip"><div class="k">投信淨流入</div><div class="v num ${(s.netflow_trust_100m??0)>=0?'pos':'neg'}">${fmt(s.netflow_trust_100m)}</div></div>
