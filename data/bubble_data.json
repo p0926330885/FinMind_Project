@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-07T08:40:16",
+  "generated_at": "2026-08-07T19:01:02",
   "as_of_date": "2026-08-07",
   "phase": 1,
   "note": "第一階段：法人資金主線（絕對/強度/z）。集中度/家數差待第二階段分點資料。",
@@ -17,19 +17,19 @@
   "sectors": [
     {
       "name": "產業趨勢",
-      "netflow_100m": -99.613,
-      "netflow_foreign_100m": -121.799,
-      "netflow_trust_100m": 8.474,
-      "turnover_100m": 2286.589,
-      "intensity_pct": -4.36,
-      "zscore": 0.07,
+      "netflow_100m": -87.507,
+      "netflow_foreign_100m": -121.794,
+      "netflow_trust_100m": 20.567,
+      "turnover_100m": 2327.987,
+      "intensity_pct": -3.76,
+      "zscore": 0.11,
       "below_floor": false,
       "members": [
         {
           "name": "台積電",
           "code": "2330",
-          "netflow_100m": 46.168,
-          "turnover_100m": 542.691
+          "netflow_100m": 46.179,
+          "turnover_100m": 579.47
         },
         {
           "name": "奇鋐",
@@ -44,9 +44,15 @@
           "turnover_100m": 54.204
         },
         {
+          "name": "創意",
+          "code": "3443",
+          "netflow_100m": 4.674,
+          "turnover_100m": 87.157
+        },
+        {
           "name": "致茂",
           "code": "2360",
-          "netflow_100m": 3.294,
+          "netflow_100m": 3.191,
           "turnover_100m": 65.277
         },
         {
@@ -54,12 +60,6 @@
           "code": "3653",
           "netflow_100m": 2.025,
           "turnover_100m": 77.252
-        },
-        {
-          "name": "創意",
-          "code": "3443",
-          "netflow_100m": 1.454,
-          "turnover_100m": 87.157
         },
         {
           "name": "萬潤",
@@ -164,10 +164,10 @@
           "turnover_100m": 133.635
         },
         {
-          "name": "台達電",
-          "code": "2308",
-          "netflow_100m": -26.755,
-          "turnover_100m": 169.848
+          "name": "貿聯-KY",
+          "code": "3665",
+          "netflow_100m": -25.058,
+          "turnover_100m": 122.855
         },
         {
           "name": "智邦",
@@ -176,10 +176,10 @@
           "turnover_100m": 95.702
         },
         {
-          "name": "貿聯-KY",
-          "code": "3665",
-          "netflow_100m": -37.156,
-          "turnover_100m": 121.557
+          "name": "台達電",
+          "code": "2308",
+          "netflow_100m": -29.876,
+          "turnover_100m": 173.168
         }
       ],
       "history": [
@@ -280,26 +280,32 @@
         },
         {
           "date": "2026-08-07",
-          "netflow_100m": -99.613,
-          "intensity_pct": -4.36
+          "netflow_100m": -87.507,
+          "intensity_pct": -3.76
         }
       ]
     },
     {
       "name": "半導體上游",
-      "netflow_100m": -56.009,
-      "netflow_foreign_100m": -64.14,
-      "netflow_trust_100m": -14.319,
-      "turnover_100m": 1025.428,
-      "intensity_pct": -5.46,
-      "zscore": 0.28,
+      "netflow_100m": -52.659,
+      "netflow_foreign_100m": -64.135,
+      "netflow_trust_100m": -10.982,
+      "turnover_100m": 1063.85,
+      "intensity_pct": -4.95,
+      "zscore": 0.29,
       "below_floor": false,
       "members": [
         {
           "name": "台積電",
           "code": "2330",
-          "netflow_100m": 46.168,
-          "turnover_100m": 542.691
+          "netflow_100m": 46.179,
+          "turnover_100m": 579.47
+        },
+        {
+          "name": "欣銓",
+          "code": "3264",
+          "netflow_100m": 0.858,
+          "turnover_100m": 20.944
         },
         {
           "name": "台星科",
@@ -312,12 +318,6 @@
           "code": "1560",
           "netflow_100m": -1.485,
           "turnover_100m": 5.624
-        },
-        {
-          "name": "欣銓",
-          "code": "3264",
-          "netflow_100m": -2.461,
-          "turnover_100m": 20.944
         },
         {
           "name": "矽格",
@@ -340,8 +340,8 @@
         {
           "name": "世界",
           "code": "5347",
-          "netflow_100m": -9.474,
-          "turnover_100m": 35.451
+          "netflow_100m": -9.454,
+          "turnover_100m": 37.094
         },
         {
           "name": "環球晶",
@@ -460,8 +460,8 @@
         },
         {
           "date": "2026-08-07",
-          "netflow_100m": -56.009,
-          "intensity_pct": -5.46
+          "netflow_100m": -52.659,
+          "intensity_pct": -4.95
         }
       ]
     },
@@ -617,18 +617,18 @@
     },
     {
       "name": "CPU IC設計",
-      "netflow_100m": -1.395,
+      "netflow_100m": 1.825,
       "netflow_foreign_100m": 3.675,
-      "netflow_trust_100m": -3.652,
+      "netflow_trust_100m": -0.432,
       "turnover_100m": 346.163,
-      "intensity_pct": -0.4,
-      "zscore": 0.19,
+      "intensity_pct": 0.53,
+      "zscore": 0.27,
       "below_floor": false,
       "members": [
         {
           "name": "創意",
           "code": "3443",
-          "netflow_100m": 1.454,
+          "netflow_100m": 4.674,
           "turnover_100m": 87.157
         },
         {
@@ -736,19 +736,19 @@
         },
         {
           "date": "2026-08-07",
-          "netflow_100m": -1.395,
-          "intensity_pct": -0.4
+          "netflow_100m": 1.825,
+          "intensity_pct": 0.53
         }
       ]
     },
     {
       "name": "散熱 HVDC",
-      "netflow_100m": -34.309,
-      "netflow_foreign_100m": -34.932,
-      "netflow_trust_100m": 8.243,
-      "turnover_100m": 673.753,
-      "intensity_pct": -5.09,
-      "zscore": -0.66,
+      "netflow_100m": -25.332,
+      "netflow_foreign_100m": -34.931,
+      "netflow_trust_100m": 17.219,
+      "turnover_100m": 678.371,
+      "intensity_pct": -3.73,
+      "zscore": -0.48,
       "below_floor": false,
       "members": [
         {
@@ -812,16 +812,16 @@
           "turnover_100m": 49.48
         },
         {
-          "name": "台達電",
-          "code": "2308",
-          "netflow_100m": -26.755,
-          "turnover_100m": 169.848
-        },
-        {
           "name": "貿聯-KY",
           "code": "3665",
-          "netflow_100m": -37.156,
-          "turnover_100m": 121.557
+          "netflow_100m": -25.058,
+          "turnover_100m": 122.855
+        },
+        {
+          "name": "台達電",
+          "code": "2308",
+          "netflow_100m": -29.876,
+          "turnover_100m": 173.168
         }
       ],
       "history": [
@@ -922,25 +922,25 @@
         },
         {
           "date": "2026-08-07",
-          "netflow_100m": -34.309,
-          "intensity_pct": -5.09
+          "netflow_100m": -25.332,
+          "intensity_pct": -3.73
         }
       ]
     },
     {
       "name": "半導體設備",
-      "netflow_100m": -8.568,
+      "netflow_100m": -8.8,
       "netflow_foreign_100m": -6.831,
-      "netflow_trust_100m": 2.399,
+      "netflow_trust_100m": 2.167,
       "turnover_100m": 183.094,
-      "intensity_pct": -4.68,
-      "zscore": -0.82,
+      "intensity_pct": -4.81,
+      "zscore": -0.84,
       "below_floor": false,
       "members": [
         {
           "name": "致茂",
           "code": "2360",
-          "netflow_100m": 3.294,
+          "netflow_100m": 3.191,
           "turnover_100m": 65.277
         },
         {
@@ -1012,7 +1012,7 @@
         {
           "name": "鴻勁",
           "code": "7769",
-          "netflow_100m": -2.011,
+          "netflow_100m": -2.14,
           "turnover_100m": 34.81
         },
         {
@@ -1126,25 +1126,25 @@
         },
         {
           "date": "2026-08-07",
-          "netflow_100m": -8.568,
-          "intensity_pct": -4.68
+          "netflow_100m": -8.8,
+          "intensity_pct": -4.81
         }
       ]
     },
     {
       "name": "PCB相關",
-      "netflow_100m": -10.642,
+      "netflow_100m": -6.33,
       "netflow_foreign_100m": -15.072,
-      "netflow_trust_100m": 6.968,
+      "netflow_trust_100m": 11.28,
       "turnover_100m": 461.165,
-      "intensity_pct": -2.31,
-      "zscore": -0.53,
+      "intensity_pct": -1.37,
+      "zscore": -0.31,
       "below_floor": false,
       "members": [
         {
           "name": "聯茂",
           "code": "6213",
-          "netflow_100m": 21.282,
+          "netflow_100m": 25.594,
           "turnover_100m": 196.679
         },
         {
@@ -1318,19 +1318,19 @@
         },
         {
           "date": "2026-08-07",
-          "netflow_100m": -10.642,
-          "intensity_pct": -2.31
+          "netflow_100m": -6.33,
+          "intensity_pct": -1.37
         }
       ]
     },
     {
       "name": "被動元件",
-      "netflow_100m": -68.627,
+      "netflow_100m": -68.605,
       "netflow_foreign_100m": -60.515,
-      "netflow_trust_100m": -9.264,
+      "netflow_trust_100m": -9.242,
       "turnover_100m": 316.547,
-      "intensity_pct": -21.68,
-      "zscore": -1.74,
+      "intensity_pct": -21.67,
+      "zscore": -1.73,
       "below_floor": false,
       "members": [
         {
@@ -1402,7 +1402,7 @@
         {
           "name": "國巨",
           "code": "2327",
-          "netflow_100m": -58.936,
+          "netflow_100m": -58.914,
           "turnover_100m": 243.314
         }
       ],
@@ -1504,8 +1504,8 @@
         },
         {
           "date": "2026-08-07",
-          "netflow_100m": -68.627,
-          "intensity_pct": -21.68
+          "netflow_100m": -68.605,
+          "intensity_pct": -21.67
         }
       ]
     },
@@ -1697,12 +1697,12 @@
     },
     {
       "name": "光通光纖",
-      "netflow_100m": -45.557,
-      "netflow_foreign_100m": -47.969,
-      "netflow_trust_100m": 3.43,
-      "turnover_100m": 589.701,
-      "intensity_pct": -7.73,
-      "zscore": -1.51,
+      "netflow_100m": -39.679,
+      "netflow_foreign_100m": -47.97,
+      "netflow_trust_100m": 9.309,
+      "turnover_100m": 592.96,
+      "intensity_pct": -6.69,
+      "zscore": -1.3,
       "below_floor": false,
       "members": [
         {
@@ -1710,6 +1710,12 @@
           "code": "4991",
           "netflow_100m": 3.108,
           "turnover_100m": 5.805
+        },
+        {
+          "name": "聯亞",
+          "code": "3081",
+          "netflow_100m": 1.54,
+          "turnover_100m": 144.828
         },
         {
           "name": "台表科",
@@ -1780,8 +1786,8 @@
         {
           "name": "光聖",
           "code": "6442",
-          "netflow_100m": -3.564,
-          "turnover_100m": 30.414
+          "netflow_100m": -3.567,
+          "turnover_100m": 33.673
         },
         {
           "name": "波若威",
@@ -1796,12 +1802,6 @@
           "turnover_100m": 12.554
         },
         {
-          "name": "聯亞",
-          "code": "3081",
-          "netflow_100m": -4.564,
-          "turnover_100m": 144.828
-        },
-        {
           "name": "全新",
           "code": "2455",
           "netflow_100m": -6.998,
@@ -1810,7 +1810,7 @@
         {
           "name": "大立光",
           "code": "3008",
-          "netflow_100m": -7.665,
+          "netflow_100m": -7.889,
           "turnover_100m": 74.577
         },
         {
@@ -1918,18 +1918,18 @@
         },
         {
           "date": "2026-08-07",
-          "netflow_100m": -45.557,
-          "intensity_pct": -7.73
+          "netflow_100m": -39.679,
+          "intensity_pct": -6.69
         }
       ]
     },
     {
       "name": "記憶體存儲",
-      "netflow_100m": -98.909,
+      "netflow_100m": -98.973,
       "netflow_foreign_100m": -78.019,
-      "netflow_trust_100m": -15.983,
-      "turnover_100m": 1290.892,
-      "intensity_pct": -7.66,
+      "netflow_trust_100m": -16.047,
+      "turnover_100m": 1290.896,
+      "intensity_pct": -7.67,
       "zscore": -0.94,
       "below_floor": false,
       "members": [
@@ -1937,7 +1937,7 @@
           "name": "南亞科",
           "code": "2408",
           "netflow_100m": 11.341,
-          "turnover_100m": 321.057
+          "turnover_100m": 321.061
         },
         {
           "name": "至上",
@@ -1972,7 +1972,7 @@
         {
           "name": "宜鼎",
           "code": "5289",
-          "netflow_100m": -11.441,
+          "netflow_100m": -11.505,
           "turnover_100m": 124.346
         },
         {
@@ -2086,19 +2086,19 @@
         },
         {
           "date": "2026-08-07",
-          "netflow_100m": -98.909,
-          "intensity_pct": -7.66
+          "netflow_100m": -98.973,
+          "intensity_pct": -7.67
         }
       ]
     },
     {
       "name": "AI相關",
-      "netflow_100m": -147.556,
-      "netflow_foreign_100m": -141.585,
-      "netflow_trust_100m": -0.881,
-      "turnover_100m": 1522.314,
-      "intensity_pct": -9.69,
-      "zscore": -1.35,
+      "netflow_100m": -135.359,
+      "netflow_foreign_100m": -141.584,
+      "netflow_trust_100m": 11.314,
+      "turnover_100m": 1530.488,
+      "intensity_pct": -8.84,
+      "zscore": -1.25,
       "below_floor": false,
       "members": [
         {
@@ -2114,16 +2114,16 @@
           "turnover_100m": 54.204
         },
         {
+          "name": "創意",
+          "code": "3443",
+          "netflow_100m": 4.674,
+          "turnover_100m": 87.157
+        },
+        {
           "name": "健策",
           "code": "3653",
           "netflow_100m": 2.025,
           "turnover_100m": 77.252
-        },
-        {
-          "name": "創意",
-          "code": "3443",
-          "netflow_100m": 1.454,
-          "turnover_100m": 87.157
         },
         {
           "name": "世芯-KY",
@@ -2159,7 +2159,7 @@
           "name": "川湖",
           "code": "2059",
           "netflow_100m": -8.185,
-          "turnover_100m": 36.651
+          "turnover_100m": 40.207
         },
         {
           "name": "勤誠",
@@ -2180,10 +2180,10 @@
           "turnover_100m": 52.295
         },
         {
-          "name": "台達電",
-          "code": "2308",
-          "netflow_100m": -26.755,
-          "turnover_100m": 169.848
+          "name": "貿聯-KY",
+          "code": "3665",
+          "netflow_100m": -25.058,
+          "turnover_100m": 122.855
         },
         {
           "name": "智邦",
@@ -2192,10 +2192,10 @@
           "turnover_100m": 95.702
         },
         {
-          "name": "貿聯-KY",
-          "code": "3665",
-          "netflow_100m": -37.156,
-          "turnover_100m": 121.557
+          "name": "台達電",
+          "code": "2308",
+          "netflow_100m": -29.876,
+          "turnover_100m": 173.168
         }
       ],
       "history": [
@@ -2296,19 +2296,19 @@
         },
         {
           "date": "2026-08-07",
-          "netflow_100m": -147.556,
-          "intensity_pct": -9.69
+          "netflow_100m": -135.359,
+          "intensity_pct": -8.84
         }
       ]
     },
     {
       "name": "PCB上游",
-      "netflow_100m": -49.235,
-      "netflow_foreign_100m": -59.527,
-      "netflow_trust_100m": 9.155,
-      "turnover_100m": 609.226,
-      "intensity_pct": -8.08,
-      "zscore": -0.84,
+      "netflow_100m": -48.609,
+      "netflow_foreign_100m": -59.525,
+      "netflow_trust_100m": 9.78,
+      "turnover_100m": 609.467,
+      "intensity_pct": -7.98,
+      "zscore": -0.82,
       "below_floor": false,
       "members": [
         {
@@ -2344,14 +2344,14 @@
         {
           "name": "台燿",
           "code": "6274",
-          "netflow_100m": -7.115,
+          "netflow_100m": -6.49,
           "turnover_100m": 131.824
         },
         {
           "name": "南亞",
           "code": "1303",
-          "netflow_100m": -9.637,
-          "turnover_100m": 239.058
+          "netflow_100m": -9.636,
+          "turnover_100m": 239.3
         },
         {
           "name": "金居",
@@ -2458,27 +2458,21 @@
         },
         {
           "date": "2026-08-07",
-          "netflow_100m": -49.235,
-          "intensity_pct": -8.08
+          "netflow_100m": -48.609,
+          "intensity_pct": -7.98
         }
       ]
     },
     {
       "name": "探針卡",
-      "netflow_100m": -4.806,
+      "netflow_100m": -10.676,
       "netflow_foreign_100m": -3.056,
-      "netflow_trust_100m": -2.774,
+      "netflow_trust_100m": -8.644,
       "turnover_100m": 90.396,
-      "intensity_pct": -5.32,
-      "zscore": -0.25,
+      "intensity_pct": -11.81,
+      "zscore": -0.9,
       "below_floor": false,
       "members": [
-        {
-          "name": "旺矽",
-          "code": "6223",
-          "netflow_100m": 1.368,
-          "turnover_100m": 40.424
-        },
         {
           "name": "中探針",
           "code": "6217",
@@ -2502,6 +2496,12 @@
           "code": "6515",
           "netflow_100m": -2.762,
           "turnover_100m": 31.549
+        },
+        {
+          "name": "旺矽",
+          "code": "6223",
+          "netflow_100m": -4.502,
+          "turnover_100m": 40.424
         }
       ],
       "history": [
@@ -2602,8 +2602,8 @@
         },
         {
           "date": "2026-08-07",
-          "netflow_100m": -4.806,
-          "intensity_pct": -5.32
+          "netflow_100m": -10.676,
+          "intensity_pct": -11.81
         }
       ]
     },
