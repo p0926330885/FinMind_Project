@@ -200,111 +200,94 @@ def unique_codes(cfg):
 
 
 def build_stock_daily(conn):
-    """每檔每日：淨流入金額（三大/外資/投信，單位:億）與成交值（億）。"""
+    """每檔每日：外資/投信/自營 各自的淨買賣超（股數）、金額（億）、張數，與成交值（億）。"""
     inst = pd.read_sql("SELECT * FROM inst_raw", conn)
     price = pd.read_sql("SELECT * FROM price_raw", conn)
     if inst.empty or price.empty:
         return pd.DataFrame()
 
     inst["net"] = inst["buy"].fillna(0) - inst["sell"].fillna(0)   # 股數
-    def group_net(names):
-        sub = inst[inst["name"].isin(names)]
-        return sub.groupby(["stock_id", "date"])["net"].sum()
-    net_all = group_net(ALL_INV).rename("net_all")
-    net_fore = group_net(FOREIGN).rename("net_foreign")
-    net_trust = group_net(TRUST).rename("net_trust")
-    net = pd.concat([net_all, net_fore, net_trust], axis=1).reset_index().fillna(0)
+    def gnet(names):
+        return inst[inst["name"].isin(names)].groupby(["stock_id", "date"])["net"].sum()
+    net = pd.concat([gnet(FOREIGN).rename("f_sh"),
+                     gnet(TRUST).rename("t_sh"),
+                     gnet(DEALER).rename("d_sh")], axis=1).reset_index().fillna(0)
 
     price = price.copy()
-    # 均價（元/股）= 成交金額 / 成交量；退回收盤價
     vol = price["trading_volume"].replace(0, pd.NA)
     price["avg_price"] = (price["trading_money"] / vol).fillna(price["close"])
     price["turnover_100m"] = price["trading_money"].fillna(0) / 1e8
 
     df = net.merge(price[["stock_id", "date", "avg_price", "turnover_100m"]],
                    on=["stock_id", "date"], how="inner")
-    for col, out in [("net_all", "flow_all"), ("net_foreign", "flow_foreign"), ("net_trust", "flow_trust")]:
-        df[out + "_100m"] = df[col] * df["avg_price"] / 1e8
+    for g in ["f", "t", "d"]:                       # 各法人金額(億) 與 張數(股/1000)
+        df[g + "_val"] = df[g + "_sh"] * df["avg_price"] / 1e8
+        df[g + "_lots"] = df[g + "_sh"] / 1000.0
     return df
 
 
 def compute_metrics(conn, cfg):
-    """彙總成板塊層 絕對/強度/z + 歷史，回傳輸出 dict。"""
+    """輸出每板塊、每個成分股的『每日 × 外資/投信/自營』金額(億)與張數，
+    以及板塊每日各法人金額與成交值。近1/5/10/20日由前端加總。"""
     daily = build_stock_daily(conn)
     if daily.empty:
         logger.error("快取無足夠資料，無法計算指標")
         return None
 
-    hist_days = int(cfg["config"].get("history_days", 20))
-    floor = float(cfg["config"].get("liquidity_floor_100m_twd", 3.0))
-    as_of = daily["date"].max()
+    out_days = int(cfg["config"].get("output_days", 30))
+    all_dates = sorted(daily["date"].unique())
+    axis = all_dates[-out_days:]
+    as_of = axis[-1]
 
-    # 代號 -> 名稱（供 member 顯示）
     code_name = {m["code"]: m["name"] for s in cfg["sectors"] for m in s["members"]}
 
+    # (stock, date) -> row，加速查詢
+    rec = {}
+    for r in daily.itertuples(index=False):
+        rec[(r.stock_id, r.date)] = r
+
+    have = set(daily["stock_id"].unique())
     sectors_out = []
     for s in cfg["sectors"]:
-        codes = [m["code"] for m in s["members"] if m.get("code")]
-        sub = daily[daily["stock_id"].isin(codes)]
-        if sub.empty:
+        codes = [m["code"] for m in s["members"] if m.get("code") and m["code"] in have]
+        if not codes:
             continue
-        # 每日板塊彙總
-        g = sub.groupby("date").agg(
-            netflow=("flow_all_100m", "sum"),
-            netflow_foreign=("flow_foreign_100m", "sum"),
-            netflow_trust=("flow_trust_100m", "sum"),
-            turnover=("turnover_100m", "sum"),
-        ).sort_index()
-        g["intensity"] = (g["netflow"] / g["turnover"].replace(0, pd.NA) * 100)
-
-        latest = g.loc[as_of] if as_of in g.index else g.iloc[-1]
-        latest_date = as_of if as_of in g.index else g.index[-1]
-
-        # z：以最新日之前 hist_days 天為基準
-        series = g["netflow"]
-        prior = series.loc[series.index < latest_date].tail(hist_days)
-        if len(prior) >= 2 and prior.std(ddof=0) > 0:
-            z = float((latest["netflow"] - prior.mean()) / prior.std(ddof=0))
-        else:
-            z = None
-
+        sec = {dtt: {"f": 0.0, "t": 0.0, "dl": 0.0, "to": 0.0} for dtt in axis}
         members = []
-        msub = sub[sub["date"] == latest_date]
-        for _, r in msub.iterrows():
-            members.append({
-                "name": code_name.get(r["stock_id"], r["stock_id"]),
-                "code": r["stock_id"],
-                "netflow_100m": round(float(r["flow_all_100m"]), 3),
-                "turnover_100m": round(float(r["turnover_100m"]), 3),
-            })
-        members.sort(key=lambda x: x["netflow_100m"], reverse=True)
+        for c in codes:
+            hist = []
+            for dtt in axis:
+                r = rec.get((c, dtt))
+                if r is None:
+                    fv = tv = dv = fl = tl = dl = to = 0.0
+                else:
+                    fv, tv, dv = float(r.f_val), float(r.t_val), float(r.d_val)
+                    fl, tl, dl = float(r.f_lots), float(r.t_lots), float(r.d_lots)
+                    to = float(r.turnover_100m)
+                hist.append({"d": dtt,
+                             "fv": round(fv, 4), "fl": round(fl),
+                             "tv": round(tv, 4), "tl": round(tl),
+                             "dv": round(dv, 4), "dl": round(dl)})
+                sec[dtt]["f"] += fv; sec[dtt]["t"] += tv
+                sec[dtt]["dl"] += dv; sec[dtt]["to"] += to
+            members.append({"name": code_name.get(c, c), "code": c, "hist": hist})
 
-        history = [{"date": d,
-                    "netflow_100m": round(float(g.loc[d, "netflow"]), 3),
-                    "intensity_pct": (round(float(g.loc[d, "intensity"]), 2)
-                                      if pd.notna(g.loc[d, "intensity"]) else None)}
-                   for d in g.index[-hist_days:]]
+        sec_hist = [{"d": dtt,
+                     "f": round(sec[dtt]["f"], 4), "t": round(sec[dtt]["t"], 4),
+                     "dl": round(sec[dtt]["dl"], 4), "to": round(sec[dtt]["to"], 3)}
+                    for dtt in axis]
+        sectors_out.append({"name": s["name"], "members": members, "history": sec_hist})
 
-        sectors_out.append({
-            "name": s["name"],
-            "netflow_100m": round(float(latest["netflow"]), 3),
-            "netflow_foreign_100m": round(float(latest["netflow_foreign"]), 3),
-            "netflow_trust_100m": round(float(latest["netflow_trust"]), 3),
-            "turnover_100m": round(float(latest["turnover"]), 3),
-            "intensity_pct": (round(float(latest["intensity"]), 2)
-                              if pd.notna(latest["intensity"]) else None),
-            "zscore": (round(z, 2) if z is not None else None),
-            "below_floor": bool(latest["turnover"] < floor),
-            "members": members,
-            "history": history,
-        })
-
+    cfg["config"]["output_days"] = out_days
     out = {
         "generated_at": dt.datetime.now().isoformat(timespec="seconds"),
         "as_of_date": as_of,
-        "phase": 1,
-        "note": "第一階段：法人資金主線（絕對/強度/z）。集中度/家數差待第二階段分點資料。",
+        "phase": 1.5,
+        "schema": 2,
+        "note": ("第一階段+：每日×外資/投信/自營 的金額(億)與張數，近1/5/10/20日由前端加總。"
+                 "集中度/家數差待第二階段分點資料。"),
         "config": cfg["config"],
+        "dates": axis,
         "sectors": sectors_out,
     }
     return out
