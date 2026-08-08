@@ -49,6 +49,9 @@
   input[type=range]{-webkit-appearance:none;appearance:none;flex:1;height:4px;background:var(--line);border-radius:3px;outline:none;cursor:pointer;}
   input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;border-radius:50%;background:var(--amber);border:2px solid var(--bg);}
   .pdate{font-size:11px;color:var(--amber);min-width:82px;text-align:center;}
+  .speeds{display:flex;gap:4px;}
+  .speeds button{background:var(--panel);border:1px solid var(--line);color:var(--ink-dim);font-size:11px;padding:3px 7px;border-radius:6px;cursor:pointer;font-family:inherit;}
+  .speeds button.on{border-color:var(--amber);color:var(--amber);}
 
   table{width:100%;border-collapse:collapse;margin-top:4px;}
   th,td{padding:7px 9px;font-size:12.5px;text-align:right;white-space:nowrap;}
@@ -111,6 +114,9 @@
         <button class="pbtn" id="playBtn"><svg id="playIco" width="14" height="14" viewBox="0 0 16 16"><path d="M4 2.5v11l9-5.5z" fill="currentColor"/></svg></button>
         <input type="range" id="scrub" min="0" max="0" value="0" step="1">
         <span class="pdate num" id="pdate">—</span>
+        <div class="speeds" id="speeds">
+          <button data-s="0.25">0.25×</button><button data-s="0.5">0.5×</button><button data-s="1" class="on">1×</button><button data-s="2">2×</button>
+        </div>
         <button class="btn" id="todayBtn" style="padding:4px 10px">回到今日</button>
       </div>
     </div>
@@ -148,7 +154,7 @@ function makeSample(){
 }
 
 let DATA=null, sel=null, investorKey="total", periodDays=1, sortKey="netflow", sortDir=-1;
-let frame=null, playing=false, lastT=0, dailyCache={};
+let frame=null, playing=false, speed=1, lastT=0, dailyCache={};
 const $=id=>document.getElementById(id);
 const NS="http://www.w3.org/2000/svg";
 const el=(t,a,p)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;};
@@ -218,11 +224,13 @@ function drawBubble(){
   const anim = frame!=null;
   // 計算各板塊點
   let pts;
-  if(anim){ pts=DATA.sectors.map(s=>{const ds=dailySeries(s)[frame]||{intensity:0,z:0,val:0,to:0};
-      // 當日分歧
-      let pos=0,neg=0;(s.members||[]).forEach(m=>{const v=memVal((m.hist||[])[frame]||{},investorKey);if(v>=0)pos+=v;else neg+=-v;});
+  if(anim){ const N=(DATA.dates||[]).length;
+      const i=Math.max(0,Math.min(N-1,Math.floor(frame))), j=Math.min(N-1,i+1), t=frame-i;
+      const lp=(a,b)=>a+(b-a)*t;
+      pts=DATA.sectors.map(s=>{const ser=dailySeries(s); const a=ser[i]||{intensity:0,z:0,val:0,to:0}, b=ser[j]||a;
+      let pos=0,neg=0;(s.members||[]).forEach(m=>{const v=memVal((m.hist||[])[i]||{},investorKey);if(v>=0)pos+=v;else neg+=-v;});
       const dv=(pos+neg>0)?Math.min(pos,neg)/(pos+neg):0;
-      return {s,x:ds.intensity,y:ds.z,size:ds.to,c:col(ds.val),dv};});
+      return {s,x:lp(a.intensity,b.intensity),y:lp(a.z,b.z),size:lp(a.to,b.to),c:col(lp(a.val,b.val)),dv};});
   } else { pts=DATA.sectors.map(s=>{const m=computeSector(s);return {s,x:m.intensity||0,y:m.z||0,size:m.turnover,c:col(m.netflow),dv:m.divergence,below:m.below_floor};}); }
   let xMax=10,yMax=1.5,toMax=1;
   if(anim){ DATA.sectors.forEach(s=>dailySeries(s).forEach(p=>{xMax=Math.max(xMax,Math.abs(p.intensity));yMax=Math.max(yMax,Math.abs(p.z));toMax=Math.max(toMax,p.to);})); }
@@ -358,8 +366,11 @@ $('playBtn').onclick=()=>{if(periodDays!==1||!DATA)return;if(frame==null)frame=0
 $('scrub').oninput=e=>{setPlaying(false);setFrame(+e.target.value);};
 $('todayBtn').onclick=exitAnim;
 function loop(now){ if(playing&&DATA&&DATA.dates&&DATA.dates.length>1){const dt=(now-lastT)/1000;lastT=now;
-  let f=(frame==null?0:frame)+dt*3; if(f>=DATA.dates.length-1)f=0; setFrame(Math.round(f)); }
+  let f=(typeof frame==='number'?frame:0)+dt*speed*2.5; if(f>=DATA.dates.length-1)f=0;
+  frame=f; $('scrub').value=Math.round(f); $('pdate').textContent=(DATA.dates||[])[Math.round(f)]||'—'; drawBubble(); }
   requestAnimationFrame(loop);}
+$('speeds').onclick=e=>{const b=e.target.closest('button');if(!b)return;speed=Number(b.dataset.s);
+  [...e.currentTarget.children].forEach(x=>x.classList.toggle('on',x===b));};
 
 function select(name){sel=(sel===name?null:name);drawTable();drawDetail();drawBubble();}
 function renderAll(){scopeText();drawBubble();drawTable();drawDetail();updatePlayerVisibility();}
