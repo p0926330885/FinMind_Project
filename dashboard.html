@@ -739,6 +739,177 @@ function renderAll(){scopeText();drawBubble();drawTable();drawDetail();updatePla
 
 tryFetch();
 requestAnimationFrame(loop);
+  // ═══════════════════════════════════════════════════════════
+// ===== v1.7 排行榜 =====
+// 熱點排行:連續同向天數排序,分「流入 / 流出」兩區
+// 規則:只新增,不修改任何現有 function 內部邏輯 / :root 變數 /
+//       既有 DOM 元素之現有內容
+// 整段包在 IIFE 裡,要移除只要刪除本區塊(至 v1.7 排行榜 END)即可
+// ═══════════════════════════════════════════════════════════
+(function(){
+  // ── (1) 注入 CSS(全部用現有 :root 變數,不新增變數) ──
+  const RANK_STYLE_CSS = `
+    #rankingCard{margin-top:14px;}
+    #rankingCard .rankHead{font-size:12px;color:var(--ink-faint);letter-spacing:.4px;
+      margin-bottom:8px;font-weight:600;display:flex;justify-content:space-between;
+      align-items:center;gap:8px;flex-wrap:wrap;}
+    #rankingCard .rankHead .rankSub{font-weight:400;color:var(--ink-faint);font-size:10.5px;}
+    #rankingCard .rankCols{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+    @media(max-width:720px){#rankingCard .rankCols{grid-template-columns:1fr;}}
+    #rankingCard .rankCol{background:var(--panel2);border:1px solid var(--line-soft);
+      border-radius:9px;padding:8px 10px;}
+    #rankingCard .rankCol.in{border-top:2px solid var(--red);}
+    #rankingCard .rankCol.out{border-top:2px solid var(--green);}
+    #rankingCard .rankColTitle{font-size:11.5px;font-weight:700;margin-bottom:6px;}
+    #rankingCard .rankCol.in .rankColTitle{color:var(--red-soft);}
+    #rankingCard .rankCol.out .rankColTitle{color:var(--green-soft);}
+    #rankingCard .rankEmpty{color:var(--ink-faint);font-size:11.5px;
+      padding:14px 4px;text-align:center;}
+    #rankingCard .rankRow{display:grid;grid-template-columns:22px 1fr auto 62px;
+      gap:8px;align-items:center;padding:6px 4px;border-top:1px solid var(--line-soft);
+      cursor:pointer;border-radius:4px;transition:background .1s;font-size:12px;}
+    #rankingCard .rankRow:first-child{border-top:none;}
+    #rankingCard .rankRow:hover{background:rgba(244,181,63,.06);}
+    #rankingCard .rankRow.sel{background:rgba(244,181,63,.13);
+      box-shadow:inset 3px 0 0 var(--amber);}
+    #rankingCard .rankNum{color:var(--ink-faint);font-size:11px;
+      font-family:"JetBrains Mono","SF Mono",ui-monospace,Menlo,monospace;}
+    #rankingCard .rankName{font-weight:600;color:var(--ink);overflow:hidden;
+      text-overflow:ellipsis;white-space:nowrap;}
+    #rankingCard .rankMeta{font-size:10.5px;color:var(--ink-dim);
+      font-family:"JetBrains Mono","SF Mono",ui-monospace,Menlo,monospace;
+      display:flex;align-items:center;gap:5px;}
+    #rankingCard .rankTag{font-size:9.5px;padding:1px 5px;border-radius:3px;
+      font-family:"Inter","Noto Sans TC",system-ui,sans-serif;}
+    #rankingCard .rankTag.accel{background:rgba(244,181,63,.15);color:var(--amber);}
+    #rankingCard .rankTag.decel{background:var(--line-soft);color:var(--ink-faint);}
+    #rankingCard .rankAmt{font-family:"JetBrains Mono","SF Mono",ui-monospace,Menlo,monospace;
+      font-variant-numeric:tabular-nums;font-size:12px;font-weight:600;text-align:right;}
+    #rankingCard .rankAmt.pos{color:var(--red);}
+    #rankingCard .rankAmt.neg{color:var(--green);}
+  `;
+  const _rankStyleEl = document.createElement('style');
+  _rankStyleEl.id = 'v17RankStyle';
+  _rankStyleEl.textContent = RANK_STYLE_CSS;
+  document.head.appendChild(_rankStyleEl);
+
+  // ── (2) 注入排行榜 DOM:在 toolbar 下方、grid(泡泡+明細)上方 ──
+  const RANK_HTML = `
+    <div class="rankHead">
+      <span>🏆 熱點排行 <span class="rankSub">依連續同向天數 ≥ 2 · 不受期間切換影響</span></span>
+      <span class="rankSub" id="rankInvLabel">合計</span>
+    </div>
+    <div class="rankCols">
+      <div class="rankCol in">
+        <div class="rankColTitle">🔥 資金流入排行</div>
+        <div id="rankInList"></div>
+      </div>
+      <div class="rankCol out">
+        <div class="rankColTitle">🧊 資金流出排行</div>
+        <div id="rankOutList"></div>
+      </div>
+    </div>
+  `;
+  const _rankCard = document.createElement('div');
+  _rankCard.className = 'card';
+  _rankCard.id = 'rankingCard';
+  _rankCard.innerHTML = RANK_HTML;
+  const _gridEl = document.querySelector('.wrap > .grid');
+  if(_gridEl && _gridEl.parentNode){
+    _gridEl.parentNode.insertBefore(_rankCard, _gridEl);
+  }
+
+  // ── (2b) 追加一句技術透明說明到既有 .note(僅 append,不動原文) ──
+  const _noteEl = document.querySelector('.wrap > .note');
+  if(_noteEl){
+    _noteEl.insertAdjacentHTML('beforeend',
+      '<br>排行榜:當日該法人淨值 ≈ 0 視為方向中斷(語意跟個股 modal 一致)。');
+  }
+
+  // ── (3) 排序 + 渲染 ──
+  const CIRCLE = ['①','②','③','④','⑤','⑥','⑦','⑧','⑨','⑩'];
+  const escHtml = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;')
+                                .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+
+  function computeRankRow(s){
+    const H = s.history || [];
+    const stay = stayDays(H, h => secVal(h, investorKey));   // 呼叫既有 function,不動其邏輯
+    if(!stay || !stay.days || stay.days < 2) return null;    // 只納入連 2 天以上
+    const cum = sumLastN(H, stay.days, h => secVal(h, investorKey));
+    return {name:s.name, dir:stay.dir, days:stay.days, accel:stay.accel, cum};
+  }
+  function accelTagHTML(accel){
+    if(accel > 0.15)  return ' <span class="rankTag accel">↑加速</span>';
+    if(accel < -0.15) return ' <span class="rankTag decel">↓放緩</span>';
+    return '';
+  }
+  function rowHTML(r, i){
+    const selCls = (sel === r.name) ? ' sel' : '';
+    const amtCls = r.cum >= 0 ? 'pos' : 'neg';
+    const amtStr = (r.cum >= 0 ? '+' : '') + Number(r.cum).toFixed(1);
+    return `<div class="rankRow${selCls}" data-name="${escHtml(r.name)}">
+      <span class="rankNum">${CIRCLE[i] || ('#'+(i+1))}</span>
+      <span class="rankName">${escHtml(r.name)}</span>
+      <span class="rankMeta">連 ${r.days} 天${accelTagHTML(r.accel)}</span>
+      <span class="rankAmt ${amtCls}">${amtStr}</span>
+    </div>`;
+  }
+  function drawRanking(){
+    if(!DATA || !DATA.sectors) return;
+    const invLab = {total:'合計', foreign:'外資', trust:'投信', dealer:'自營'}[investorKey] || '合計';
+    const labEl = document.getElementById('rankInvLabel');
+    if(labEl) labEl.textContent = invLab;
+
+    const all = DATA.sectors.map(computeRankRow).filter(x => x);
+    // 排序:天數 DESC → 加速 DESC → |cum| DESC
+    const cmp = (a,b) => (b.days - a.days)
+                       || (b.accel - a.accel)
+                       || (Math.abs(b.cum) - Math.abs(a.cum));
+    const inRows  = all.filter(r => r.dir > 0).sort(cmp).slice(0, 5);
+    const outRows = all.filter(r => r.dir < 0).sort(cmp).slice(0, 5);
+
+    const inBox  = document.getElementById('rankInList');
+    const outBox = document.getElementById('rankOutList');
+    if(inBox){
+      inBox.innerHTML = inRows.length
+        ? inRows.map(rowHTML).join('')
+        : '<div class="rankEmpty">暫無資金流入板塊</div>';
+    }
+    if(outBox){
+      outBox.innerHTML = outRows.length
+        ? outRows.map(rowHTML).join('')
+        : '<div class="rankEmpty">暫無資金流出板塊</div>';
+    }
+    // 綁定點擊 → 呼叫既有 select(name),不修改其內部
+    document.querySelectorAll('#rankingCard .rankRow').forEach(row => {
+      row.onclick = () => {
+        const name = row.getAttribute('data-name');
+        if(!name) return;
+        select(name);       // ← 既有 function,不動
+        drawRanking();      // ← 更新排行榜自身高亮
+      };
+    });
+  }
+
+  // ── (4) 觀察現有事件觸發,不覆蓋既有 handler ──
+  // 4a. 資料載入或切換 → 觀察 #meta 內容變化(setData 會更新 innerHTML)
+  const _metaEl = document.getElementById('meta');
+  if(_metaEl){
+    new MutationObserver(() => drawRanking())
+      .observe(_metaEl, {childList:true, characterData:true, subtree:true});
+  }
+  // 4b. 法人別切換 → 額外掛 addEventListener(不覆蓋既有 .onclick)
+  const _segInv = document.getElementById('segInv');
+  if(_segInv) _segInv.addEventListener('click', () => setTimeout(drawRanking, 0));
+  // 4c. 泡泡 / 表格列點擊(觸發 sel 變化)→ 冒泡到容器
+  const _bubEl = document.getElementById('bubble');
+  if(_bubEl) _bubEl.addEventListener('click', () => setTimeout(drawRanking, 0));
+  const _tbodyEl = document.getElementById('tbody');
+  if(_tbodyEl) _tbodyEl.addEventListener('click', () => setTimeout(drawRanking, 0));
+  // 4d. 若 DATA 已 ready,立刻畫一次(熱重載或觀察器錯過的邊界情況)
+  if(DATA) drawRanking();
+})();
+// ===== v1.7 排行榜 END =====
 </script>
 </body>
 </html>
