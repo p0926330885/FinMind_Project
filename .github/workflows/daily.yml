@@ -2,8 +2,8 @@ name: Daily FinMind Pipeline
 
 on:
   schedule:
-    # 台灣時間每天 15:30(UTC 07:30)自動執行,收盤後抓資料
-    - cron: '30 7 * * 1-5'
+        # 台灣時間每天 20:30(UTC 12:30)自動執行,收盤後抓資料(延後給 FinMind 入庫時間)
+       - cron: '30 12 * * 1-5'
   workflow_dispatch:   # 允許你在網頁上手動按按鈕執行
 
 permissions:
