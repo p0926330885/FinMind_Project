@@ -634,10 +634,11 @@ function drawStockModal(){
             <option value="10"${modalMA===10?' selected':''}>10日</option>
             <option value="20"${modalMA===20?' selected':''}>20日</option>
           </select>
-          · ▼爆量
+          · ▼爆量 · 移過看單日
         </span>
       </div>
       <svg id="mPriceChart" viewBox="0 0 700 220"></svg>
+      <div class="mtip fixed" id="mPriceTip"></div>
     </div>`:''}
 
     <!-- ★ v1.7.0 · D 累計法人買賣超線圖 -->
@@ -1000,6 +1001,61 @@ function drawPriceChart(){
   H.forEach((h,i)=>{if(i%showEvery===0||i===H.length-1){
     el('text',{x:Xi(i),y:ht-8,'text-anchor':'middle',class:'axtick'},svg).textContent=(h.d||'').slice(5);
   }});
+
+  // ═════ v1.7.1 · 股價走勢 hover tooltip ═════
+  const priceOverlay=el('rect',{x:pad.l,y:pT,width:W-pad.l-pad.r,height:vB-pT,fill:'transparent'},svg);
+  priceOverlay.style.cursor='crosshair';
+  const priceCh=el('g',{style:'pointer-events:none'},svg);
+  priceCh.style.display='none';
+  const priceChLine=el('line',{y1:pT,y2:vB,class:'cum-crosshair'},priceCh);
+  function onPriceMove(evt){
+    const rect=svg.getBoundingClientRect();
+    const scaleX=W/rect.width;
+    const mx=(evt.clientX-rect.left)*scaleX;
+    if(mx<pad.l||mx>W-pad.r){hidePriceTip();return;}
+    const ratio=(mx-pad.l)/(W-pad.l-pad.r);
+    const idx=Math.max(0,Math.min(H.length-1,Math.round(ratio*(H.length-1))));
+    const h=H[idx];
+    const xp=Xi(idx);
+    priceCh.style.display='';
+    priceChLine.setAttribute('x1',xp);
+    priceChLine.setAttribute('x2',xp);
+    // 清除上次的點/框
+    priceCh.querySelectorAll('circle,rect.hlbar').forEach(c=>c.remove());
+    // 股價點
+    el('circle',{cx:xp,cy:Yp(h.cp),r:4.5,fill:'var(--amber)',stroke:'#fff','stroke-width':1.5},priceCh);
+    // MA 點(若有值)
+    if(cpSMA[idx]!=null){
+      el('circle',{cx:xp,cy:Yp(cpSMA[idx]),r:3,fill:'var(--ink-dim)',stroke:'#fff','stroke-width':1},priceCh);
+    }
+    // 成交量柱子外框標記
+    const vv=h.vl||0;
+    el('rect',{x:xp-bw/2,y:Yv(vv),width:bw,height:vB-Yv(vv)||1,fill:'none',stroke:'var(--amber)','stroke-width':1.5,class:'hlbar'},priceCh);
+    // Tooltip 內容
+    const tip=$('mPriceTip'); if(!tip)return;
+    const prevCP=idx>0?H[idx-1].cp:h.cp;
+    const chg=h.cp-prevCP;
+    const chgpct=prevCP?chg/prevCP*100:0;
+    const isBurst=vAvg>0&&vv>=burstThr;
+    const maVal=cpSMA[idx];
+    let html=`<div class="tdate">${h.d}</div>
+      <div class="trow"><span class="tk">收盤</span><span>${h.cp.toFixed(2)}${idx>0?` <span class="tsub ${cls3(chg)}">${chg>0?'+':''}${chg.toFixed(2)} (${chgpct>0?'+':''}${chgpct.toFixed(2)}%)</span>`:''}</span></div>`;
+    if(maVal!=null){
+      html+=`<div class="trow"><span class="tk">MA${ma}</span><span style="color:var(--ink-dim)">${maVal.toFixed(2)}</span></div>`;
+    }
+    html+=`<div class="trow"><span class="tk">成交量</span><span>${vv.toLocaleString()} 張${isBurst?' <span style="color:var(--amber)">⚠爆量</span>':''}</span></div>`;
+    tip.innerHTML=html;
+    tip.style.opacity=1;
+  }
+  function hidePriceTip(){
+    priceCh.style.display='none';
+    const tip=$('mPriceTip'); if(tip)tip.style.opacity=0;
+  }
+  priceOverlay.addEventListener('mousemove',onPriceMove);
+  priceOverlay.addEventListener('mouseleave',hidePriceTip);
+  priceOverlay.addEventListener('touchstart',e=>{if(e.touches[0])onPriceMove(e.touches[0]);},{passive:true});
+  priceOverlay.addEventListener('touchmove',e=>{if(e.touches[0])onPriceMove(e.touches[0]);},{passive:true});
+  priceOverlay.addEventListener('touchend',hidePriceTip);
 }
 
 // ═══════════════════════════════════════════════════════════
