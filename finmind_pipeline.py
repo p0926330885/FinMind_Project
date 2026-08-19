@@ -2,17 +2,19 @@
 # -*- coding: utf-8 -*-
 """
 板塊泡泡系統 — 第一階段 FinMind 資料管線（法人資金主線）
-v1.5.1（缺洞感知版）
+v1.6.0（個股詳情資料集成版）
 
-本次升級（vs v1.5）：
-  ① 加 FORCE_REFETCH_DAYS（預設 15 天）：每次跑都強制回抓最近 N 天，
-     即使 SQLite 快取顯示已有資料——避免 FinMind 資料延遲導致的殘餘缺洞。
-  ② compute_metrics 新增「有股價但缺法人資料」偵測邏輯：
-     - 該股該日缺洞 → 從個股 hist 移除該日（不寫假的 0）
-     - 板塊 sec_hist 保留該日、標記 "missing": N（前端可提示）
-     - 板塊成交值 to 仍用股價的 turnover 補計，維持基準正確
-  ③ log 會列出近 7 天所有缺洞明細（前 15 筆），方便盯 FinMind 資料完整度。
-  ④ 輸出 JSON 新增 top-level "missing_stock_dates" 統計。
+本次升級（vs v1.5.1）：
+  ① Schema 版本 2 → 3。個股 hist 每筆新增 2 個欄位：
+     - "cp"：當日收盤價（元）
+     - "vl"：當日成交量（張）
+     兩者用於前端個股 Modal 的股價走勢圖與成交量 bar。
+  ② 前端未升級也不會壞（讀不到 cp/vl 就自動不畫股價圖）。
+
+沿用 v1.5.1 的：
+  · FORCE_REFETCH_DAYS 強制回抓機制
+  · compute_metrics 缺洞偵測邏輯
+  · 個股 hist 缺洞日子照樣 skip 避免假 0
 
 執行：  python finmind_pipeline.py
 相依：  pip install -r requirements.txt
@@ -49,7 +51,7 @@ DATA_DIR.mkdir(parents=True, exist_ok=True)
 TOKEN = os.environ.get("FINMIND_TOKEN", "").strip()
 BACKFILL_DAYS = int(os.environ.get("BACKFILL_DAYS", "120"))
 OVERLAP_DAYS = int(os.environ.get("OVERLAP_DAYS", "10"))
-FORCE_REFETCH_DAYS = int(os.environ.get("FORCE_REFETCH_DAYS", "15"))  # ★ 新增
+FORCE_REFETCH_DAYS = int(os.environ.get("FORCE_REFETCH_DAYS", "15"))
 REQUEST_SLEEP = float(os.environ.get("REQUEST_SLEEP", "0.4"))
 MAX_RETRY = int(os.environ.get("MAX_RETRY", "4"))
 
@@ -75,7 +77,7 @@ if not logger.handlers:
 
 
 class QuotaExceeded(Exception):
-    """FinMind 額度用盡（HTTP/status 402）。"""
+    pass
 
 
 # ─────────────────────────── SQLite 快取 ───────────────────────────
@@ -158,11 +160,6 @@ def upsert_price(conn, rows):
 
 
 def _start_for(conn, table, code, today):
-    """算增量抓取起點。
-    ★ v1.5.1 改：取 (快取最後日 - OVERLAP) 和 (今天 - FORCE_REFETCH) 兩者較早者，
-      確保即使快取顯示有資料，也會強制回抓最近 FORCE_REFETCH_DAYS 天，
-      修復因 FinMind 資料延遲寫進來的缺洞。
-    """
     force_start = today - dt.timedelta(days=FORCE_REFETCH_DAYS)
     last = last_cached_date(conn, table, code)
     if last is None:
@@ -172,7 +169,6 @@ def _start_for(conn, table, code, today):
 
 
 def update_universe(conn, codes, today):
-    """對唯一母體逐檔增量抓 法人 + 股價。"""
     end = today.isoformat()
     n = len(codes)
     for i, code in enumerate(sorted(codes), 1):
@@ -202,7 +198,8 @@ def unique_codes(cfg):
 
 
 def build_stock_daily(conn):
-    """每檔每日：外資/投信/自營 各自的淨買賣超（股數）、金額（億）、張數，與成交值（億）。"""
+    """每檔每日：外資/投信/自營 各自的淨買賣超（股數）、金額（億）、張數，
+    以及成交值（億）、【v1.6.0 新增】收盤價 close、【v1.6.0 新增】成交量張數 vol_lots。"""
     inst = pd.read_sql("SELECT * FROM inst_raw", conn)
     price = pd.read_sql("SELECT * FROM price_raw", conn)
     if inst.empty or price.empty:
@@ -219,9 +216,12 @@ def build_stock_daily(conn):
     vol = price["trading_volume"].replace(0, pd.NA)
     price["avg_price"] = (price["trading_money"] / vol).fillna(price["close"])
     price["turnover_100m"] = price["trading_money"].fillna(0) / 1e8
+    # ★ v1.6.0 新增：成交量（張）
+    price["vol_lots"] = price["trading_volume"].fillna(0) / 1000.0
 
-    df = net.merge(price[["stock_id", "date", "avg_price", "turnover_100m"]],
-                   on=["stock_id", "date"], how="inner")
+    df = net.merge(
+        price[["stock_id", "date", "avg_price", "turnover_100m", "close", "vol_lots"]],
+        on=["stock_id", "date"], how="inner")
     for g in ["f", "t", "d"]:
         df[g + "_val"] = df[g + "_sh"] * df["avg_price"] / 1e8
         df[g + "_lots"] = df[g + "_sh"] / 1000.0
@@ -229,25 +229,19 @@ def build_stock_daily(conn):
 
 
 def compute_metrics(conn, cfg):
-    """輸出每板塊、每個成分股的『每日 × 外資/投信/自營』金額(億)與張數，
-    以及板塊每日各法人金額與成交值。近1/5/10/20日由前端加總。
-
-    ★ v1.5.1 改：新增「有股價但缺法人資料」偵測邏輯。
-    """
     daily = build_stock_daily(conn)
     if daily.empty:
         logger.error("快取無足夠資料，無法計算指標")
         return None
 
-    # ★ 偵測「有活動股價 (turnover > 0) 但缺法人資料」的 (stock, date) 缺洞
+    # 缺洞偵測（v1.5.1）
     price_df = pd.read_sql("SELECT stock_id, date, trading_money FROM price_raw", conn)
     price_active = {(r.stock_id, r.date) for r in price_df.itertuples(index=False)
                     if r.trading_money and r.trading_money > 0}
     inst_covered = set(zip(daily["stock_id"], daily["date"]))
-    missing_inst = price_active - inst_covered  # 缺洞：有股價 turnover 但無 inst
+    missing_inst = price_active - inst_covered
 
     out_days = int(cfg["config"].get("output_days", 30))
-    # axis 用 price（更完整）而非 daily（inner join 後）決定，避免 as_of 掉一天
     all_dates_set = set(daily["date"].tolist()) | set(price_df["date"].tolist())
     all_dates = sorted(all_dates_set)
     axis = all_dates[-out_days:]
@@ -259,7 +253,6 @@ def compute_metrics(conn, cfg):
     for r in daily.itertuples(index=False):
         rec[(r.stock_id, r.date)] = r
 
-    # 供板塊成交值補計用（缺洞股票 turnover 用 price 補）
     price_turnover = {}
     for r in price_df.itertuples(index=False):
         price_turnover[(r.stock_id, r.date)] = float(r.trading_money or 0) / 1e8
@@ -279,23 +272,27 @@ def compute_metrics(conn, cfg):
             for dtt in axis:
                 r = rec.get((c, dtt))
                 if r is None:
-                    # 該股該日無 inst 資料
                     if (c, dtt) in missing_inst:
-                        # ★ 缺洞：不寫入個股 hist（避免假的 0）
-                        # 板塊 to 用 price turnover 補計，並標記 missing
                         sector_missing_count += 1
                         sec[dtt]["to"] += price_turnover.get((c, dtt), 0.0)
                         sec[dtt]["missing"] += 1
-                    # 若非缺洞（該股當日無 price 資料，例如停牌/未上市）→ 同樣 skip
                     continue
 
                 fv, tv, dv = float(r.f_val), float(r.t_val), float(r.d_val)
                 fl, tl, dl = float(r.f_lots), float(r.t_lots), float(r.d_lots)
                 to = float(r.turnover_100m)
-                hist.append({"d": dtt,
-                             "fv": round(fv, 4), "fl": round(fl),
-                             "tv": round(tv, 4), "tl": round(tl),
-                             "dv": round(dv, 4), "dl": round(dl)})
+                # ★ v1.6.0：新增 cp、vl
+                cp = float(r.close) if r.close is not None else None
+                vl = float(r.vol_lots) if r.vol_lots is not None else None
+                item = {"d": dtt,
+                        "fv": round(fv, 4), "fl": round(fl),
+                        "tv": round(tv, 4), "tl": round(tl),
+                        "dv": round(dv, 4), "dl": round(dl)}
+                if cp is not None:
+                    item["cp"] = round(cp, 2)
+                if vl is not None:
+                    item["vl"] = round(vl)
+                hist.append(item)
                 sec[dtt]["f"] += fv
                 sec[dtt]["t"] += tv
                 sec[dtt]["dl"] += dv
@@ -310,33 +307,31 @@ def compute_metrics(conn, cfg):
                     "dl": round(sec[dtt]["dl"], 4),
                     "to": round(sec[dtt]["to"], 3)}
             if sec[dtt]["missing"] > 0:
-                item["missing"] = sec[dtt]["missing"]  # ★ 標記該日有幾支缺資料
+                item["missing"] = sec[dtt]["missing"]
             sec_hist.append(item)
         sectors_out.append({"name": s["name"], "members": members, "history": sec_hist})
 
-    # ★ log 缺洞明細（近 7 天）
     if missing_inst:
         cutoff = (dt.date.today() - dt.timedelta(days=7)).isoformat()
         recent = sorted([k for k in missing_inst if k[1] >= cutoff], key=lambda x: (x[1], x[0]))
-        logger.warning(f"⚠ 全部有 {len(missing_inst)} 個 (股票×日期) 缺法人資料（sector-level 累計影響 {sector_missing_count} 次）")
+        logger.warning(f"⚠ 全部有 {len(missing_inst)} 個 (股票×日期) 缺法人資料（sector 累計影響 {sector_missing_count} 次）")
         if recent:
             logger.warning(f"⚠ 其中近 7 天有 {len(recent)} 個，明細（前 15 筆）：")
             for c, d in recent[:15]:
                 logger.warning(f"    - {c} @ {d}")
-            logger.warning(f"⚠ 下次跑管線會自動嘗試重抓（FORCE_REFETCH_DAYS={FORCE_REFETCH_DAYS}）")
+            logger.warning(f"⚠ 下次跑會自動嘗試重抓（FORCE_REFETCH_DAYS={FORCE_REFETCH_DAYS}）")
 
     cfg["config"]["output_days"] = out_days
     out = {
         "generated_at": dt.datetime.now().isoformat(timespec="seconds"),
         "as_of_date": as_of,
-        "phase": 1.5,
-        "schema": 2,
-        "note": ("第一階段+：每日×外資/投信/自營 的金額(億)與張數，近1/5/10/20日由前端加總。"
-                 "v1.5.1 起：缺法人資料的日子從個股 hist 移除（避免假 0）；"
-                 "板塊 sec_hist 保留該日並標記 missing。集中度/家數差待第二階段分點資料。"),
+        "phase": 1.6,
+        "schema": 3,  # ★ 版本 bump：hist 多了 cp / vl 欄位
+        "note": ("第一階段+ v1.6：個股 hist 新增 cp（收盤價）、vl（成交量張）。"
+                 "前端偵測有無 cp/vl 決定要不要畫股價圖。缺洞日子照樣 skip 避免假 0。"),
         "config": cfg["config"],
         "dates": axis,
-        "missing_stock_dates": len(missing_inst),  # ★ 新欄位：總缺洞數
+        "missing_stock_dates": len(missing_inst),
         "sectors": sectors_out,
     }
     return out
@@ -346,7 +341,7 @@ def compute_metrics(conn, cfg):
 def main():
     t0 = time.time()
     logger.info("=" * 56)
-    logger.info("管線啟動（第一階段：法人資金）v1.5.1 缺洞感知版")
+    logger.info("管線啟動（第一階段：法人資金）v1.6.0 個股詳情資料集成版")
 
     if not TOKEN:
         logger.error("找不到 FINMIND_TOKEN（請設定環境變數或 .env）。中止。")
