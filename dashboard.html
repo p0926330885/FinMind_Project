@@ -120,6 +120,9 @@
   .mchart .ch-title{font-size:10.5px;color:var(--ink-faint);margin-bottom:4px;display:flex;justify-content:space-between;}
   .mchart svg{width:100%;height:auto;}
   .mchart .barval{font-size:9px;fill:var(--ink);pointer-events:none;font-family:"JetBrains Mono",monospace;}
+  .mchart select{background:var(--panel);border:1px solid var(--line);color:var(--amber);
+    font-family:inherit;font-size:11px;padding:2px 6px;border-radius:5px;cursor:pointer;outline:none;margin:0 2px;}
+  .mchart select:hover{border-color:var(--amber);}
 
   .mtable{max-height:280px;overflow-y:auto;background:var(--panel2);border:1px solid var(--line-soft);border-radius:9px;}
   .mtable table{margin-top:0;}
@@ -224,7 +227,7 @@ function makeSample(){
 let DATA=null, sel=null, investorKey="total", periodDays=1, sortKey="netflow", sortDir=-1;
 let frame=null, playing=false, speed=1, lastT=0, dailyCache={};
 // 個股 Modal 狀態
-let modalStock=null, modalInv='total';
+let modalStock=null, modalInv='total', modalMA=5;   // ★ v1.6.1:均線/均量週期(5/10/20)
 
 const $=id=>document.getElementById(id);
 const NS="http://www.w3.org/2000/svg";
@@ -539,8 +542,7 @@ function drawStockModal(){
 
     <div class="mreading">
       <div class="lbl">當日白話解讀</div>
-      ${rd.parts.map(p=>`<b>${p}</b>`).join(' · ')}<br>
-      → ${rd.tag}
+      ${rd.parts.map(p=>`<b>${p}</b>`).join(' · ')}
     </div>
 
     <div class="mtabs">
@@ -558,7 +560,18 @@ function drawStockModal(){
     </div>
 
     ${hasCP? `<div class="mchart">
-      <div class="ch-title"><span>股價走勢 + 成交量(張) · 近30日</span><span class="dim">▼爆量</span></div>
+      <div class="ch-title">
+        <span>股價走勢 + 成交量(張) · 近30日</span>
+        <span class="dim">
+          均線/均量:
+          <select id="maSelect">
+            <option value="5"${modalMA===5?' selected':''}>5日</option>
+            <option value="10"${modalMA===10?' selected':''}>10日</option>
+            <option value="20"${modalMA===20?' selected':''}>20日</option>
+          </select>
+          · ▼爆量
+        </span>
+      </div>
       <svg id="mPriceChart" viewBox="0 0 700 220"></svg>
     </div>`:''}
 
@@ -580,7 +593,12 @@ function drawStockModal(){
     drawInvChart();
   };
   drawInvChart();
-  if(hasCP) drawPriceChart();
+  if(hasCP){
+    drawPriceChart();
+    // ★ v1.6.1:綁均線/均量 dropdown 事件
+    const maSel=$('maSelect');
+    if(maSel) maSel.onchange = e => { modalMA = Number(e.target.value); drawPriceChart(); };
+  }
   drawStockTable();
 }
 
@@ -624,7 +642,20 @@ function drawInvChart(){
   }});
 }
 
-// 股價 + 成交量 chart
+// 移動平均(v1.6.3):從第 1 天起就有值,前 (period-1) 天用「當時可用天數」的累積平均填充
+// 例如 period=5 時:第1天=該天值本身、第2天=前2天均、...、第5天起=完整5日均
+function smaLine(arr, period){
+  return arr.map((_,i)=>{
+    const start = Math.max(0, i - period + 1);
+    const window = arr.slice(start, i + 1);
+    if(!window.length) return null;
+    let s = 0;
+    for(const v of window) s += v;
+    return s / window.length;
+  });
+}
+
+// 股價 + 成交量 chart(v1.6.1:加均線/均量 dropdown、拿掉誤導的 vMax 標記)
 function drawPriceChart(){
   const svg=$('mPriceChart'); if(!svg||!modalStock)return; svg.innerHTML='';
   const H=(modalStock.member.hist||[]).filter(h=>h.cp!=null).slice(-30);
@@ -634,6 +665,8 @@ function drawPriceChart(){
   const pT=pad.t, pB=pT+priceH;
   const vT=pB+gap, vB=vT+volH;
   const cps=H.map(h=>h.cp), vls=H.map(h=>h.vl||0);
+  const ma=modalMA;   // 5/10/20
+  const cpSMA=smaLine(cps, ma);   // ★ v1.6.2:只算股價的 SMA,成交量改回水平均量
   const cmin=Math.min(...cps), cmax=Math.max(...cps);
   const cpad=(cmax-cmin)*0.1||1;
   const cLo=cmin-cpad, cHi=cmax+cpad;
@@ -650,37 +683,49 @@ function drawPriceChart(){
   el('text',{x:pad.l-4,y:Yp(cHi)+3,'text-anchor':'end',class:'axtick'},svg).textContent=cHi.toFixed(0);
   el('text',{x:pad.l-4,y:Yp(cLo)+3,'text-anchor':'end',class:'axtick'},svg).textContent=cLo.toFixed(0);
   el('text',{x:pad.l-4,y:pT+priceH*0.5+3,'text-anchor':'end',class:'axtick'},svg).textContent=((cHi+cLo)/2).toFixed(0);
-  // 20日均量(volume avg for burst detect)
-  const vAvg=vls.length>=20 ? mean(vls.slice(-20)) : mean(vls);
-  const burstThr=vAvg*1.5;
   // price line + area
   const pts=H.map((h,i)=>[Xi(i),Yp(h.cp)]);
   const areaPath='M'+pts[0][0]+','+pB+' L'+pts.map(p=>p[0]+','+p[1]).join(' L')+' L'+pts[pts.length-1][0]+','+pB+' Z';
   el('path',{d:areaPath,fill:'var(--amber)',opacity:.08},svg);
   el('path',{d:'M'+pts.map(p=>p.join(',')).join(' L'),fill:'none',stroke:'var(--amber)','stroke-width':1.6},svg);
-  // last dot & label
+  // ★ v1.6.1:股價均線(虛線,依 modalMA 選 5/10/20)
+  const smaPts=cpSMA.map((v,i)=>v==null?null:[Xi(i),Yp(v)]).filter(x=>x);
+  if(smaPts.length>=2){
+    el('path',{d:'M'+smaPts.map(p=>p.join(',')).join(' L'),fill:'none',
+               stroke:'var(--ink-dim)','stroke-width':1.2,'stroke-dasharray':'4 3',opacity:.85},svg);
+    // MA 標籤(貼在最後一個點右邊)
+    const lastMA=smaPts[smaPts.length-1];
+    el('text',{x:lastMA[0]+4,y:lastMA[1]+3,class:'axtick',fill:'var(--ink-dim)'},svg).textContent=`MA${ma}`;
+  }
+  // last dot & label(股價)
   const lp=pts[pts.length-1];
   el('circle',{cx:lp[0],cy:lp[1],r:3,fill:'var(--amber)'},svg);
   el('text',{x:lp[0]+4,y:lp[1]-4,class:'axtick',fill:'var(--amber)'},svg).textContent=H[H.length-1].cp.toFixed(2);
   // volume bars
   const bw=step*0.7;
   el('line',{x1:pad.l,y1:vB,x2:W-pad.r,y2:vB,stroke:'var(--line)','stroke-width':1},svg);
+  // ★ v1.6.2:成交量均量改回水平線,依 modalMA 選 5/10/20 天,取最近該窗口的平均
+  const vWindow = vls.slice(-ma);
+  const vAvg = vWindow.length ? mean(vWindow) : 0;
+  const burstThr = vAvg * 1.5;
   H.forEach((h,i)=>{
     const v=h.vl||0;
     const barColor= i>0 && h.cp>=H[i-1].cp ? 'var(--red)' : 'var(--green)';
     el('rect',{x:Xi(i)-bw/2,y:Yv(v),width:bw,height:vB-Yv(v)||1,fill:barColor,opacity:.7,rx:1},svg);
-    if(v>=burstThr){
-      // 爆量標記(倒三角)
+    // 爆量標記:當日量 ≥ 均量 × 1.5
+    if(vAvg > 0 && v >= burstThr){
       const tx=Xi(i), ty=Yv(v)-3;
       el('polygon',{points:`${tx-4},${ty-6} ${tx+4},${ty-6} ${tx},${ty}`,fill:'var(--amber)'},svg);
     }
   });
-  // avg vol line
-  const yAvg=Yv(vAvg);
-  el('line',{x1:pad.l,y1:yAvg,x2:W-pad.r,y2:yAvg,stroke:'var(--amber)','stroke-width':.8,'stroke-dasharray':'3 3',opacity:.7},svg);
-  el('text',{x:W-pad.r+3,y:yAvg+3,class:'axtick',fill:'var(--amber)'},svg).textContent='均量';
-  // 右邊 vol scale
-  el('text',{x:W-pad.r+3,y:vT+8,class:'axtick'},svg).textContent=Math.round(vMax);
+  // ★ v1.6.2:成交量均量水平虛線(依 modalMA 天數)
+  if(vAvg > 0){
+    const yAvg = Yv(vAvg);
+    el('line',{x1:pad.l, y1:yAvg, x2:W-pad.r, y2:yAvg,
+               stroke:'var(--amber)', 'stroke-width':.9, 'stroke-dasharray':'3 3', opacity:.7},svg);
+    el('text',{x:W-pad.r+3, y:yAvg+3, class:'axtick', fill:'var(--amber)'},svg).textContent=`${ma}日均量`;
+  }
+  // ★ v1.6.1:移除右邊誤導的 vMax 標記(原本會顯示 20194 之類的意義不明數字)
   // x 軸
   const showEvery=Math.max(1,Math.floor(H.length/5));
   H.forEach((h,i)=>{if(i%showEvery===0||i===H.length-1){
@@ -689,10 +734,15 @@ function drawPriceChart(){
 }
 
 // 個股表格(近 10 日,顯示張數)
+// ★ v1.6.1:0 用預設白色(不再誤導成紅色/綠色),只有 >0 才紅、<0 才綠
 function drawStockTable(){
   const tb=$('mTblBody'); if(!tb||!modalStock)return;
   const H=(modalStock.member.hist||[]).slice(-10).reverse();
-  const cls=v=>v>=0?'pos':'neg', s=(v,plus=true)=>fmt(v,0,plus);
+  const cls=v=>v>0?'pos':(v<0?'neg':'');   // ★ 0 沒 class → 用預設白色
+  const s=(v,plus=true)=>{
+    if(v===0) return '0';                   // ★ 0 不顯示 +/- 號
+    return fmt(v,0,plus);
+  };
   tb.innerHTML=H.map(h=>{
     const total=(h.fl||0)+(h.tl||0)+(h.dl||0);
     return `<tr>
@@ -739,7 +789,6 @@ function renderAll(){scopeText();drawBubble();drawTable();drawDetail();updatePla
 
 tryFetch();
 requestAnimationFrame(loop);
-
 </script>
 </body>
 </html>
