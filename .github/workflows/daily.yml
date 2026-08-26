@@ -1,13 +1,24 @@
 name: Daily FinMind Pipeline
 
 on:
+  # 台灣時間排程(週一~五)
+  # 主排程 TWT 18:30 (UTC 10:30) - 早看,可能有零星缺洞
+  # 副排程 TWT 21:00 (UTC 13:00) - 補洞,追平 FinMind 完整入庫
+  # v1.6 pipeline 已內建缺洞感知 + FORCE_REFETCH_DAYS=15 自動修復,
+  # 第二次排程會自動補齊第一次漏抓的資料。
   schedule:
-        # 台灣時間每天 20:30(UTC 12:30)自動執行,收盤後抓資料(延後給 FinMind 入庫時間)
-       - cron: '30 12 * * 1-5'
-  workflow_dispatch:   # 允許你在網頁上手動按按鈕執行
+    - cron: '30 10 * * 1-5'   # UTC 10:30 = TWT 18:30
+    - cron: '0 13 * * 1-5'    # UTC 13:00 = TWT 21:00
+  # 允許在網頁上手動按鈕執行
+  workflow_dispatch:
 
 permissions:
-  contents: write      # 允許把跑出來的資料存回倉庫
+  contents: write   # 允許把跑出來的 bubble_data.json commit 回倉庫
+
+# 避免兩個排程剛好重疊時互踩(理論上不會,但保險起見)
+concurrency:
+  group: finmind-pipeline
+  cancel-in-progress: false
 
 jobs:
   run-pipeline:
@@ -27,12 +38,14 @@ jobs:
       - name: 執行管線
         env:
           FINMIND_TOKEN: ${{ secrets.FINMIND_TOKEN }}
+          # 若 FinMind 額度常爆,把下面數字調小(預設 15)
+          # FORCE_REFETCH_DAYS: "7"
         run: python finmind_pipeline.py
 
       - name: 把最新資料存回倉庫
         run: |
-          git config user.name "github-actions"
-          git config user.email "actions@github.com"
-          git add data/bubble_data.json
-          git commit -m "自動更新資料" || echo "沒有變更"
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A data/
+          git diff --staged --quiet || git commit -m "auto: update bubble_data.json ($(date -u +%Y-%m-%d\ %H:%M) UTC)"
           git push
