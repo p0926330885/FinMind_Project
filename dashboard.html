@@ -317,7 +317,7 @@ function computeSector(s){
   let pos=0,neg=0; (s.members||[]).forEach(m=>{const v=sumLastN(m.hist||[],W,h=>memVal(h,investorKey)); if(v>=0)pos+=v;else neg+=-v;});
   const dv=(pos+neg>0)?Math.min(pos,neg)/(pos+neg):0;
   const below= turnover>0 && (turnover/W)<floorVal();
-  return {netflow,turnover,intensity,z,divergence:dv,below_floor:below};
+  const missLast=(H[H.length-1]||{}).missing||0; /* ★ v1.7.2 最新資料日缺幾檔法人資料 */ return {netflow,turnover,intensity,z,divergence:dv,below_floor:below,missLast};
 }
 
 // ── 每日序列(播放用,依法人別) ──
@@ -417,7 +417,7 @@ function drawTable(){
     tr.onclick=()=>select(s.name);
     // ★ v1.7.0:改用 cls3(0→白)
     tr.innerHTML=[
-      `<td class="name">${m.below_floor?'<span class="flag">⚑</span> ':''}${s.name}</td>`,
+      `<td class="name">${m.below_floor?'<span class="flag">⚑</span> ':''}${s.name}${m.missLast?` <span class="flag" title="最新資料日有 ${m.missLast} 檔法人資料尚未入庫(或當日法人無交易),下次更新會自動補">⚠ 缺${m.missLast}檔</span>`:''}</td>`,
       `<td class="num ${cls3(m.netflow)}">${fmt(m.netflow)}</td>`,
       `<td class="num ${cls3(m.intensity||0)}">${fmt(m.intensity)}</td>`,
       `<td class="num ${cls3(m.z||0)}">${m.z==null?'<span class="dim">—</span>':fmt(m.z,1)}</td>`,
