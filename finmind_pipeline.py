@@ -282,7 +282,7 @@ def compute_metrics(conn, cfg):
                 fl, tl, dl = float(r.f_lots), float(r.t_lots), float(r.d_lots)
                 to = float(r.turnover_100m)
                 # ★ v1.6.0：新增 cp、vl
-                cp = float(r.close) if r.close is not None else None
+                cp = float(r.close) if (r.close is not None and r.close > 0) else None  # v1.6.1 close=0 視為無資料
                 vl = float(r.vol_lots) if r.vol_lots is not None else None
                 item = {"d": dtt,
                         "fv": round(fv, 4), "fl": round(fl),
@@ -323,7 +323,7 @@ def compute_metrics(conn, cfg):
 
     cfg["config"]["output_days"] = out_days
     out = {
-        "generated_at": dt.datetime.now().isoformat(timespec="seconds"),
+        "generated_at": dt.datetime.now(dt.timezone(dt.timedelta(hours=8))).isoformat(timespec="seconds"),
         "as_of_date": as_of,
         "phase": 1.6,
         "schema": 3,  # ★ 版本 bump：hist 多了 cp / vl 欄位
