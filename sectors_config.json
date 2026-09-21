@@ -2,9 +2,9 @@
   "meta": {
     "version": "0.2",
     "note": "由設定管理面板匯出。code 已核實;flexible_par 僅備註。",
-    "sector_count": 16,
-    "member_count_with_dups": 183,
-    "unique_universe_count": 154,
+    "sector_count": 17,
+    "member_count_with_dups": 189,
+    "unique_universe_count": 158,
     "codes_resolved": true
   },
   "config": {
