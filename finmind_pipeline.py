@@ -244,6 +244,18 @@ def compute_metrics(conn, cfg):
     out_days = int(cfg["config"].get("output_days", 30))
     all_dates_set = set(daily["date"].tolist()) | set(price_df["date"].tolist())
     all_dates = sorted(all_dates_set)
+    # ★ v1.6.1：最新交易日若法人資料還沒入庫（FinMind 說明書：股價表 17:30 更新、
+    #   三大法人表 20:00 才更新），先不把這天放進圖表，避免整天被算成「淨流入 0」。
+    inst_cnt = daily.groupby("date")["stock_id"].nunique()
+    price_cnt = pd.Series([d for _, d in price_active], dtype="object").value_counts()
+    while all_dates:
+        last_d = all_dates[-1]
+        need, got = int(price_cnt.get(last_d, 0)), int(inst_cnt.get(last_d, 0))
+        if need > 0 and got < need * 0.5:
+            logger.warning(f"⚠ {last_d} 法人資料只入庫 {got}/{need} 檔，本次先不納入（下次排程會補上）")
+            all_dates.pop()
+        else:
+            break
     axis = all_dates[-out_days:]
     as_of = axis[-1]
 
