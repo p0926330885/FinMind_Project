@@ -1041,6 +1041,18 @@
           "flags": []
         }
       ]
+    },
+        {
+      "id": "S17",
+      "name": "TGV FOPLP",
+      "members": [
+        { "name": "群創", "code": "3481", "flags": [] },
+        { "name": "友達", "code": "2409", "flags": [] },
+        { "name": "日月光投控", "code": "3711", "flags": [] },
+        { "name": "力成", "code": "6239", "flags": [] },
+        { "name": "蔚華科", "code": "3055", "flags": [] },
+        { "name": "東捷", "code": "8064", "flags": [] }
+      ]
     }
   ],
   "cross_sector_index": {
