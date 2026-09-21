@@ -605,8 +605,8 @@ function drawStockModal(){
     </div>
 
     <div class="mreading">
-      <div class="lbl">當日白話解讀</div>
-      ${rd.parts.map(p=>`<b>${p}</b>`).join(' · ')}
+      <div class="lbl">當日白話解讀 · ${last.d||''}</div>
+      ${rd.parts.map(p=>`<b>${p}</b>`).join(' · ')}<div style="margin-top:5px">結論:${rd.tag}</div>
     </div>
 
     <div class="mtabs">
