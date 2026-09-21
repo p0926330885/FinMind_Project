@@ -2,13 +2,13 @@ name: Daily FinMind Pipeline
 
 on:
   # 台灣時間排程(週一~五)
-  # 主排程 TWT 18:30 (UTC 10:30) - 早看,可能有零星缺洞
-  # 副排程 TWT 21:00 (UTC 13:00) - 補洞,追平 FinMind 完整入庫
+  # 班次一 TWT 18:37 (UTC 10:37) - 法人資料若還沒出(FinMind 20:00 才更新),管線自動保留前一日
+  # 班次二 TWT 20:47 (UTC 12:47) - 法人資料入庫後的正式更新(分鐘數避開整點,減少 GitHub 延遲)
   # v1.6 pipeline 已內建缺洞感知 + FORCE_REFETCH_DAYS=15 自動修復,
   # 第二次排程會自動補齊第一次漏抓的資料。
   schedule:
-    - cron: '30 10 * * 1-5'   # UTC 10:30 = TWT 18:30
-    - cron: '0 13 * * 1-5'    # UTC 13:00 = TWT 21:00
+    - cron: '37 10 * * 1-5'   # UTC 10:37 = TWT 18:37
+    - cron: '47 12 * * 1-5'   # UTC 12:47 = TWT 20:47
   # 允許在網頁上手動按鈕執行
   workflow_dispatch:
 
