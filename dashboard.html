@@ -537,18 +537,24 @@ function plainReading(f,t,d){
   parts.push(`外資${dir(f)} ${fmt(f,2)}億`);
   parts.push(`投信${dir(t)} ${fmt(t,2)}億`);
   parts.push(`自營${dir(d)} ${fmt(d,2)}億`);
-  const activef=abs(f)>0.05, activet=abs(t)>0.05, actived=abs(d)>0.05;
-  const active=[activef&&f,activet&&t,actived&&d].filter(v=>v!==false&&v!==0);
-  let tag='';
-  if(active.length>=2){
-    const allPos=active.every(v=>v>0), allNeg=active.every(v=>v<0);
-    if(allPos) tag='<b style="color:var(--red)">土洋同買</b>';
-    else if(allNeg) tag='<b style="color:var(--green)">土洋同賣</b>';
-    else tag='<b style="color:var(--amber)">對作</b>(方向不一致)';
-  } else if(active.length===1){
-    tag=`<b>${active[0]>0?'單邊買進':'單邊賣出'}</b>`;
-  } else {
+    // ★ v1.7.2 · 結論標籤:外資+本土同向才叫「土洋」;只有投信+自營同向叫「本土法人」
+  const act=[['外資',f],['投信',t],['自營',d]].filter(([,v])=>abs(v)>0.05);
+  let tag;
+  if(!act.length){
     tag='<b class="dim">法人無明顯動作</b>';
+  } else if(act.length===1){
+    const [nm,v]=act[0];
+    tag=`<b class="${cls3(v)}">${nm}單邊${v>0?'買進':'賣出'}</b>`;
+  } else {
+    const allPos=act.every(([,v])=>v>0), allNeg=act.every(([,v])=>v<0);
+    if(allPos||allNeg){
+      const who=act.some(([nm])=>nm==='外資')?'土洋':'本土法人';
+      tag=`<b class="${allPos?'pos':'neg'}">${who}同${allPos?'買':'賣'}</b>`;
+    } else {
+      const buy=act.filter(([,v])=>v>0).map(([nm])=>nm).join('、');
+      const sell=act.filter(([,v])=>v<0).map(([nm])=>nm).join('、');
+      tag=`<b style="color:var(--amber)">對作</b>(${buy}買 vs ${sell}賣)`;
+    }
   }
   return {parts,tag};
 }
